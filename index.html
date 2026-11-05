@@ -1,0 +1,4127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LuxeMart Neo - The Pinnacle of Luxury E-Commerce. Curated Electronics, Haute Horology, Bespoke Apparel, and Modern Circadian Living.">
+  <title>LuxeMart Neo | The Luxury & Tech Flagship</title>
+
+  <!-- Google Fonts: Space Grotesk (Editorial/Modern) + Plus Jakarta Sans (Clean/High-End) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6.5.1 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       1. LUXURY COLOR PALETTE & DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --brand-indigo: #6366f1;
+      --brand-violet: #8b5cf6;
+      --brand-pink: #ec4899;
+      --brand-cyan: #06b6d4;
+      --brand-emerald: #10b981;
+      --brand-amber: #f59e0b;
+      --brand-rose: #f43f5e;
+
+      --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+      --gradient-cyan: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --gradient-amber: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-full: 9999px;
+
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-fast: all 0.2s var(--ease-spring);
+      --transition-normal: all 0.35s var(--ease-spring);
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #06080d;
+      --bg-surface: #0e121a;
+      --bg-surface-elevated: #151a26;
+      --bg-surface-subtle: #1c2436;
+      --bg-glass: rgba(14, 18, 26, 0.82);
+      --bg-input: #111622;
+
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-medium: rgba(255, 255, 255, 0.14);
+      --border-hover: rgba(99, 102, 241, 0.55);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --text-accent: #818cf8;
+
+      --card-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.7);
+      --card-shadow-hover: 0 24px 48px -12px rgba(99, 102, 241, 0.25), 0 0 20px -2px rgba(139, 92, 246, 0.2);
+    }
+
+    [data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-surface-subtle: #e2e8f0;
+      --bg-glass: rgba(255, 255, 255, 0.88);
+      --bg-input: #f1f5f9;
+
+      --border-subtle: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --border-hover: var(--brand-indigo);
+
+      --text-primary: #090d16;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --text-accent: #4f46e5;
+
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      --card-shadow-hover: 0 20px 35px -5px rgba(99, 102, 241, 0.15);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      position: relative;
+    }
+
+    /* Background Ambient Glowing Orbs */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.16;
+      pointer-events: none;
+      z-index: -1;
+      animation: ambientGlow 22s infinite alternate ease-in-out;
+    }
+    body::before {
+      top: -100px;
+      left: -100px;
+      background: radial-gradient(circle, var(--brand-indigo), var(--brand-violet));
+    }
+    body::after {
+      bottom: -100px;
+      right: -100px;
+      background: radial-gradient(circle, var(--brand-pink), var(--brand-cyan));
+      animation-duration: 28s;
+    }
+
+    @keyframes ambientGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.15); }
+      100% { transform: translate(-40px, 80px) scale(0.95); }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+
+    button {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-medium);
+      border-radius: var(--radius-full);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--brand-indigo);
+    }
+
+    /* ==========================================================================
+       3. TOP ANNOUNCEMENT & TICKER BAR
+       ========================================================================== */
+    .announcement-bar {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      font-size: 0.82rem;
+      padding: 0.55rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 60;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .ticker-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pill-flash {
+      background: rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(4px);
+      padding: 0.15rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .promo-copy-tag {
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px dashed rgba(255, 255, 255, 0.8);
+      padding: 0.1rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: var(--transition-fast);
+    }
+    .promo-copy-tag:hover {
+      background: #ffffff;
+      color: var(--brand-indigo);
+      border-color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    .ticker-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.78rem;
+    }
+
+    .ticker-countdown {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.15rem 0.65rem;
+      border-radius: var(--radius-full);
+    }
+
+    .currency-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.15rem 0.6rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+    }
+    .currency-select {
+      background: transparent;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .currency-select option {
+      background: #0e121a;
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       4. STICKY ULTRA-GLASS HEADER
+       ========================================================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition-normal);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+      gap: 1.75rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-icon-halo {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.45);
+    }
+
+    .brand-text-grad {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Live Search Input */
+    .search-box-wrap {
+      flex: 1;
+      max-width: 440px;
+      position: relative;
+    }
+
+    .search-input-box {
+      display: flex;
+      align-items: center;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 0.65rem 1.25rem;
+      transition: var(--transition-fast);
+    }
+
+    .search-input-box:focus-within {
+      background: var(--bg-surface);
+      border-color: var(--brand-indigo);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.22);
+    }
+
+    .search-input-box i {
+      color: var(--text-muted);
+      margin-right: 0.75rem;
+      font-size: 0.92rem;
+    }
+
+    .search-input-field {
+      width: 100%;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .search-input-field::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Navigation Links */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      list-style: none;
+    }
+
+    .nav-item-link {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      position: relative;
+      padding: 0.4rem 0.2rem;
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .nav-item-link:hover, .nav-item-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-item-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2.5px;
+      background: var(--gradient-primary);
+      border-radius: var(--radius-full);
+    }
+
+    /* Action Buttons */
+    .header-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .header-pill-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      position: relative;
+      transition: var(--transition-fast);
+      font-size: 0.95rem;
+    }
+
+    .header-pill-btn:hover {
+      background: var(--bg-surface-subtle);
+      border-color: var(--border-hover);
+      color: var(--brand-indigo);
+      transform: translateY(-2px);
+    }
+
+    .header-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: var(--gradient-primary);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      min-width: 20px;
+      height: 20px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      border: 2px solid var(--bg-surface);
+      box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+      transition: transform 0.25s var(--ease-bounce);
+    }
+
+    .header-badge.bump {
+      transform: scale(1.35);
+    }
+
+    /* ==========================================================================
+       5. DYNAMIC RUNNING HERO CAROUSEL / SLIDER
+       ========================================================================== */
+    .hero-slider-section {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 60%);
+    }
+
+    .hero-carousel-viewport {
+      position: relative;
+      width: 100%;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease, transform 0.8s var(--ease-spring);
+      transform: scale(0.97) translateX(30px);
+      display: flex;
+      align-items: center;
+      padding: 3.5rem 0;
+    }
+
+    .hero-slide.active-slide {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateX(0);
+      position: relative;
+    }
+
+    .hero-slide-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+      width: 100%;
+    }
+
+    .hero-slide-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      padding: 0.4rem 1.1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-accent);
+      margin-bottom: 1.35rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-slide-title {
+      font-family: var(--font-display);
+      font-size: 3.6rem;
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.25rem;
+    }
+    .hero-slide-title span {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-slide-desc {
+      font-size: 1.12rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 2.25rem;
+      max-width: 540px;
+    }
+
+    .hero-slide-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-luxe {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: var(--radius-full);
+      transition: var(--transition-fast);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .btn-luxe-primary {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+    .btn-luxe-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.55);
+    }
+
+    .btn-luxe-secondary {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-medium);
+      backdrop-filter: blur(10px);
+    }
+    .btn-luxe-secondary:hover {
+      background: var(--bg-surface-elevated);
+      border-color: var(--brand-indigo);
+      transform: translateY(-3px);
+      color: var(--text-accent);
+    }
+
+    /* Carousel Image Stage */
+    .hero-carousel-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      transform: rotate(-1deg);
+      transition: transform 0.5s var(--ease-spring);
+    }
+    .hero-carousel-card:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .hero-carousel-img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+
+    /* Carousel Nav Arrows & Dots */
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-full);
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-medium);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      z-index: 20;
+      transition: var(--transition-fast);
+      box-shadow: var(--card-shadow);
+    }
+    .carousel-nav-btn:hover {
+      background: var(--brand-indigo);
+      color: #ffffff;
+      border-color: var(--brand-indigo);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .carousel-btn-prev { left: 24px; }
+    .carousel-btn-next { right: 24px; }
+
+    .carousel-dots-row {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.65rem;
+      z-index: 20;
+    }
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: var(--radius-full);
+      background: var(--border-medium);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .carousel-dot.active-dot {
+      width: 32px;
+      background: var(--gradient-primary);
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+    }
+
+    /* ==========================================================================
+       6. DEPARTMENT SECTIONS (ELECTRONICS, FASHION, WATCHES, HOME)
+       ========================================================================== */
+    .department-section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .dept-header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.25rem;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    .dept-title-group h2 {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .dept-title-group p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 0.35rem;
+    }
+
+    .dept-view-all-link {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+    .dept-view-all-link:hover {
+      color: var(--brand-indigo);
+      transform: translateX(4px);
+    }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Product Card */
+    .luxe-product-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring), border-color 0.4s ease;
+    }
+    .luxe-product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--border-hover);
+    }
+
+    .product-stage {
+      position: relative;
+      height: 270px;
+      background: var(--bg-surface-elevated);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-primary-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease-spring);
+    }
+    .luxe-product-card:hover .product-primary-img {
+      transform: scale(1.08);
+    }
+
+    .tag-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      z-index: 3;
+      backdrop-filter: blur(8px);
+    }
+    .tag-sale { background: var(--gradient-amber); color: #fff; }
+    .tag-hot { background: var(--gradient-primary); color: #fff; }
+    .tag-new { background: var(--gradient-cyan); color: #fff; }
+
+    .card-actions-float {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      z-index: 3;
+    }
+
+    .btn-circle-action {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-medium);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      transition: var(--transition-fast);
+    }
+    .btn-circle-action:hover {
+      background: var(--brand-indigo);
+      color: #ffffff;
+      border-color: var(--brand-indigo);
+      transform: scale(1.12);
+    }
+    .btn-circle-action.wishlist-active {
+      background: var(--brand-rose);
+      color: #ffffff;
+      border-color: var(--brand-rose);
+    }
+
+    .product-body-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-category-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .card-rating-star {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.8rem;
+      color: var(--brand-amber);
+      font-weight: 700;
+    }
+
+    .product-title-text {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.2s;
+    }
+    .product-title-text:hover {
+      color: var(--brand-indigo);
+    }
+
+    /* Scarcity Meter */
+    .scarcity-meter {
+      margin-bottom: 1rem;
+    }
+    .scarcity-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--brand-amber);
+      margin-bottom: 0.3rem;
+    }
+    .scarcity-track {
+      width: 100%;
+      height: 4px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface-elevated);
+      overflow: hidden;
+    }
+    .scarcity-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      background: var(--gradient-amber);
+    }
+
+    .product-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-top: auto;
+      margin-bottom: 1.25rem;
+    }
+
+    .product-current-price {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .product-original-price {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .product-discount-pill {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--brand-rose);
+      background: rgba(244, 63, 94, 0.12);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    .btn-quick-add {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: var(--transition-fast);
+    }
+    .btn-quick-add:hover {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       7. VERIFIED CLIENT REVIEWS & TESTIMONIALS SECTION
+       ========================================================================== */
+    .reviews-section {
+      padding: 5rem 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .reviews-summary-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .score-box-col {
+      text-align: center;
+      border-right: 1px solid var(--border-subtle);
+      padding-right: 2rem;
+    }
+    .score-big {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text-primary);
+    }
+    .score-stars {
+      color: var(--brand-amber);
+      font-size: 1.25rem;
+      margin: 0.5rem 0;
+    }
+
+    .score-breakdown-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .bar-line-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.82rem;
+    }
+    .bar-line-track {
+      flex: 1;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface-subtle);
+      overflow: hidden;
+    }
+    .bar-line-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      background: var(--gradient-primary);
+    }
+
+    .review-action-col {
+      text-align: center;
+      border-left: 1px solid var(--border-subtle);
+      padding-left: 2rem;
+    }
+
+    .reviews-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .review-card {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition-fast);
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow);
+      border-color: var(--border-hover);
+    }
+
+    .review-card-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .reviewer-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--brand-indigo);
+    }
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .reviewer-badge {
+      font-size: 0.72rem;
+      color: var(--brand-emerald);
+      font-weight: 700;
+    }
+
+    .review-stars-row {
+      color: var(--brand-amber);
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .review-text-quote {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+
+    .review-product-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-accent);
+      background: var(--bg-surface);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-top: auto;
+    }
+
+    /* ==========================================================================
+       8. MODALS (QUICK VIEW, CART, WISHLIST, CHECKOUT, REVIEW SUBMISSION, ORDERS)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(3, 7, 18, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-window {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+      width: 100%;
+      max-width: 740px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.92) translateY(24px);
+      transition: transform 0.35s var(--ease-spring);
+    }
+    .modal-overlay.open .modal-window {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-dismiss-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      z-index: 10;
+      transition: var(--transition-fast);
+    }
+    .modal-dismiss-btn:hover {
+      background: var(--brand-rose);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    /* Cart Slide Drawer */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(3, 7, 18, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 220;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-slider {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 480px;
+      height: 100%;
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-medium);
+      box-shadow: -15px 0 50px rgba(0, 0, 0, 0.6);
+      z-index: 225;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-spring);
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer-overlay.open .drawer-slider {
+      transform: translateX(0);
+    }
+
+    .drawer-head {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .drawer-head h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .free-shipping-meter {
+      padding: 1rem 1.75rem;
+      background: var(--bg-surface-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .fs-text-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .fs-bar-track {
+      width: 100%;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface-subtle);
+      overflow: hidden;
+    }
+    .fs-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      background: var(--gradient-primary);
+      transition: width 0.4s var(--ease-spring);
+    }
+
+    .drawer-items-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .cart-row-card {
+      display: flex;
+      gap: 1.15rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      position: relative;
+    }
+    .cart-thumb-img {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      background: var(--bg-surface-subtle);
+    }
+    .cart-row-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-row-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      padding-right: 1.5rem;
+    }
+    .cart-row-variant {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .cart-row-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .cart-row-price {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+    }
+    .cart-item-del-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .cart-item-del-btn:hover { color: var(--brand-rose); }
+
+    .drawer-bottom-card {
+      padding: 1.5rem 1.75rem;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+    }
+
+    .qty-counter {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-surface-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 0.2rem 0.4rem;
+    }
+    .qty-step-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.82rem;
+    }
+    .qty-step-btn:hover { background: var(--brand-indigo); color: #fff; }
+    .qty-number {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* Interactive Write Review Form */
+    .star-rating-picker {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 1.75rem;
+      color: var(--border-medium);
+      cursor: pointer;
+      margin: 0.5rem 0 1.25rem;
+    }
+    .star-rating-picker i:hover,
+    .star-rating-picker i.active-star {
+      color: var(--brand-amber);
+    }
+
+    /* Checkout Modal */
+    .checkout-flow-modal { max-width: 820px; }
+    .checkout-steps-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-surface-elevated);
+    }
+    .nav-step-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .step-badge-circ {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 2px solid var(--border-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+    .nav-step-item.active { color: var(--brand-indigo); }
+    .nav-step-item.active .step-badge-circ {
+      background: var(--brand-indigo);
+      border-color: var(--brand-indigo);
+      color: #fff;
+    }
+    .nav-step-item.completed .step-badge-circ {
+      background: var(--brand-emerald);
+      border-color: var(--brand-emerald);
+      color: #fff;
+    }
+
+    .step-page-body {
+      padding: 2.25rem 2.5rem;
+      display: none;
+    }
+    .step-page-body.active-page {
+      display: block;
+      animation: fadeUp 0.35s var(--ease-spring);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .form-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-field-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+    .form-input-control {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1.15rem;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+    .form-input-control:focus {
+      border-color: var(--brand-indigo);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Live Credit Card */
+    .visual-card-preview {
+      width: 100%;
+      max-width: 360px;
+      height: 200px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+      color: #ffffff;
+      padding: 1.5rem;
+      margin: 0 auto 1.75rem;
+      box-shadow: 0 15px 35px -5px rgba(67, 56, 202, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .visual-card-chip {
+      width: 42px;
+      height: 32px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #fbbf24, #d97706);
+    }
+
+    .pay-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .pay-card-option {
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      background: var(--bg-surface-elevated);
+      transition: var(--transition-fast);
+    }
+    .pay-card-option.active-method {
+      border-color: var(--brand-indigo);
+      background: rgba(99, 102, 241, 0.12);
+    }
+    .pay-card-option i {
+      font-size: 1.85rem;
+      color: var(--brand-indigo);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Tracking Timeline in Orders Dashboard */
+    .timeline-track-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin: 1.25rem 0 1.5rem;
+      padding: 0 1rem;
+    }
+    .timeline-track-wrap::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 2rem;
+      right: 2rem;
+      height: 2px;
+      background: var(--border-subtle);
+      z-index: 1;
+    }
+    .timeline-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      z-index: 2;
+    }
+    .timeline-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .timeline-node.done .timeline-dot {
+      background: var(--brand-emerald);
+      border-color: var(--brand-emerald);
+      color: #fff;
+    }
+    .timeline-node.current .timeline-dot {
+      background: var(--brand-indigo);
+      border-color: var(--brand-indigo);
+      color: #fff;
+    }
+
+    /* FAQ Accordion Section */
+    .faq-section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .faq-accordion-box {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition-fast);
+    }
+    .faq-question-btn {
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-align: left;
+    }
+    .faq-answer {
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      display: none;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-question-btn i { transform: rotate(180deg); }
+
+    /* Footer & Mobile Bottom Bar */
+    .luxe-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 5rem 0 2.5rem;
+    }
+    .footer-columns-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .mobile-bottom-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-subtle);
+      z-index: 95;
+      padding: 0.5rem 1rem;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .mobile-bar-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+    .mobile-bar-btn i { font-size: 1.2rem; }
+    .mobile-bar-btn.active { color: var(--brand-indigo); }
+
+    /* Toast Stack & Social Proof */
+    .toast-stack {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+    .toast-card {
+      pointer-events: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-left: 4px solid var(--brand-indigo);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.25rem;
+      min-width: 300px;
+      max-width: 380px;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      transform: translateX(120%);
+      opacity: 0;
+      transition: all 0.4s var(--ease-spring);
+    }
+    .toast-card.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .live-social-proof {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem 1.15rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      z-index: 150;
+      max-width: 360px;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: transform 0.5s var(--ease-spring), opacity 0.5s ease;
+    }
+    .live-social-proof.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .social-proof-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .hero-slide-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-slide-desc { margin: 0 auto 2.25rem; }
+      .hero-slide-actions { justify-content: center; }
+      .reviews-summary-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .score-box-col, .review-action-col {
+        border: none;
+        padding: 0;
+      }
+      .footer-columns-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .announcement-bar { display: none; }
+      .nav-menu, .search-box-wrap { display: none; }
+      .hero-slide-title { font-size: 2.35rem; }
+      .mobile-bottom-bar { display: flex; }
+      .footer-columns-grid { grid-template-columns: 1fr; }
+      .pay-methods-grid { grid-template-columns: 1fr; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .live-social-proof { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP ANNOUNCEMENT BAR
+       ========================================================================== -->
+  <div class="announcement-bar">
+    <div class="ticker-left">
+      <span class="pill-flash"><i class="fa-solid fa-bolt"></i> LIMITED FLASH DROP</span>
+      <span>Complimentary Worldwide Express Delivery on orders over <strong id="freeShipThreshold">$50</strong>! Voucher: <strong class="promo-copy-tag" onclick="copyPromoCode('FLASH20')">FLASH20</strong> (20% OFF)</span>
+    </div>
+    <div class="ticker-right">
+      <div class="ticker-countdown">
+        <i class="fa-regular fa-clock"></i>
+        <span>Ends in: <strong id="countdownClock">08h : 42m : 19s</strong></span>
+      </div>
+      <div class="currency-select-wrap">
+        <i class="fa-solid fa-globe"></i>
+        <select class="currency-select" id="currencySelector" onchange="changeCurrency(this.value)">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="PKR">PKR (Rs)</option>
+          <option value="AED">AED (AED)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+        <div class="brand-icon-halo">
+          <i class="fa-solid fa-gem"></i>
+        </div>
+        <span>Luxe<span class="brand-text-grad">Mart</span> Neo</span>
+      </a>
+
+      <!-- Live Search Box -->
+      <div class="search-box-wrap">
+        <div class="search-input-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="globalSearchInput" class="search-input-field" placeholder="Search 28+ luxury electronics, watches, apparel..." autocomplete="off">
+          <button id="searchClearBtn" style="display:none; color:var(--text-muted);" title="Clear search">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <ul class="nav-menu">
+        <li><a href="#electronicsDept" class="nav-item-link" onclick="scrollToSection('electronicsDept')">Electronics</a></li>
+        <li><a href="#fashionDept" class="nav-item-link" onclick="scrollToSection('fashionDept')">Apparel</a></li>
+        <li><a href="#watchesDept" class="nav-item-link" onclick="scrollToSection('watchesDept')">Timepieces</a></li>
+        <li><a href="#homeDept" class="nav-item-link" onclick="scrollToSection('homeDept')">Home Living</a></li>
+        <li><a href="#reviewsSection" class="nav-item-link" onclick="scrollToSection('reviewsSection')">Client Reviews</a></li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="header-actions-group">
+        <button class="header-pill-btn" id="soundToggleBtn" onclick="toggleAudio()" title="Sound FX">
+          <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+        </button>
+        <button class="header-pill-btn" id="themeToggleBtn" onclick="toggleColorTheme()" title="Toggle Dark/Light">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="header-pill-btn" onclick="openWishlistDrawer()" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="header-badge" id="wishlistCountBadge">0</span>
+        </button>
+        <button class="header-pill-btn" onclick="openOrdersModal()" title="Orders & Review">
+          <i class="fa-solid fa-receipt"></i>
+          <span class="header-badge" id="ordersCountBadge">0</span>
+        </button>
+        <button class="header-pill-btn" onclick="openCartDrawer()" title="Shopping Bag">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="header-badge" id="cartCountBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       DYNAMIC RUNNING HERO CAROUSEL / SLIDER (4 RICH ROTATING SHOWCASES)
+       ========================================================================== -->
+  <section class="hero-slider-section">
+    <div class="container hero-carousel-viewport" id="heroCarouselViewport">
+      <!-- Slide 1: Audio / Tech -->
+      <div class="hero-slide active-slide" data-slide-index="0">
+        <div class="hero-slide-grid">
+          <div>
+            <div class="hero-slide-tag"><i class="fa-solid fa-bolt"></i> NEXT-GEN ACOUSTICS 2026</div>
+            <h1 class="hero-slide-title">Lossless Sound. <span>Pure Titanium</span> Precision.</h1>
+            <p class="hero-slide-desc">Step into studio-grade hybrid active noise cancellation with custom 45mm neodymium drivers and 40-hour lossless playback.</p>
+            <div class="hero-slide-actions">
+              <button class="btn-luxe btn-luxe-primary" onclick="quickAddToBag(1)">
+                <i class="fa-solid fa-bag-shopping"></i> Buy Now • <span class="hero-price-tag-1">$249.99</span>
+              </button>
+              <button class="btn-luxe btn-luxe-secondary" onclick="openQuickViewModal(1)">
+                <i class="fa-regular fa-eye"></i> Inspect Specs
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="hero-carousel-card">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80" alt="Headphones" class="hero-carousel-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Luxury Watches -->
+      <div class="hero-slide" data-slide-index="1">
+        <div class="hero-slide-grid">
+          <div>
+            <div class="hero-slide-tag"><i class="fa-solid fa-clock"></i> HAUTE HOROLOGY COLLECTION</div>
+            <h1 class="hero-slide-title">Mechanical Genius. <span>Sapphire Crystal</span>.</h1>
+            <p class="hero-slide-desc">Swiss-standard 28,800 vph automatic chronograph with AR-coated sapphire crystal face and Tuscan vegetable-tanned bridle leather.</p>
+            <div class="hero-slide-actions">
+              <button class="btn-luxe btn-luxe-primary" onclick="quickAddToBag(2)">
+                <i class="fa-solid fa-bag-shopping"></i> Acquire Timepiece • <span class="hero-price-tag-2">$399.00</span>
+              </button>
+              <button class="btn-luxe btn-luxe-secondary" onclick="openQuickViewModal(2)">
+                <i class="fa-regular fa-eye"></i> View Mechanism
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="hero-carousel-card">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80" alt="Sapphire Watch" class="hero-carousel-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Bespoke Fashion -->
+      <div class="hero-slide" data-slide-index="2">
+        <div class="hero-slide-grid">
+          <div>
+            <div class="hero-slide-tag"><i class="fa-solid fa-shirt"></i> AUTUMN RUNWAY EDITION</div>
+            <h1 class="hero-slide-title">Pure Mongolian <span>Grade-A Cashmere</span>.</h1>
+            <p class="hero-slide-desc">Hand-loomed 2-ply relaxed knitwear woven for supreme thermal insulation, cloud-soft breathability, and timeless Italian tailoring.</p>
+            <div class="hero-slide-actions">
+              <button class="btn-luxe btn-luxe-primary" onclick="quickAddToBag(7)">
+                <i class="fa-solid fa-bag-shopping"></i> Shop Knitwear • <span class="hero-price-tag-3">$145.00</span>
+              </button>
+              <button class="btn-luxe btn-luxe-secondary" onclick="scrollToSection('fashionDept')">
+                <i class="fa-solid fa-arrow-down"></i> Explore Apparel
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="hero-carousel-card">
+              <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80" alt="Cashmere Knit" class="hero-carousel-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Circadian Home Decor -->
+      <div class="hero-slide" data-slide-index="3">
+        <div class="hero-slide-grid">
+          <div>
+            <div class="hero-slide-tag"><i class="fa-solid fa-couch"></i> ARCHITECTURAL LIVING</div>
+            <h1 class="hero-slide-title">Sculptural Brass & <span>Circadian Glow</span>.</h1>
+            <p class="hero-slide-desc">Transform your sanctuary with touch-capacitive warm amber lamps, wireless Qi fast charging, and ultrasonic matte ceramic diffusers.</p>
+            <div class="hero-slide-actions">
+              <button class="btn-luxe btn-luxe-primary" onclick="quickAddToBag(11)">
+                <i class="fa-solid fa-bag-shopping"></i> Shop Living • <span class="hero-price-tag-4">$99.00</span>
+              </button>
+              <button class="btn-luxe btn-luxe-secondary" onclick="scrollToSection('homeDept')">
+                <i class="fa-solid fa-arrow-down"></i> Explore Home
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="hero-carousel-card">
+              <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&q=80" alt="Lamp" class="hero-carousel-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button class="carousel-nav-btn carousel-btn-prev" onclick="prevHeroSlide()" title="Previous slide">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="carousel-nav-btn carousel-btn-next" onclick="nextHeroSlide()" title="Next slide">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- Dots Indicators -->
+      <div class="carousel-dots-row">
+        <div class="carousel-dot active-dot" onclick="goToHeroSlide(0)"></div>
+        <div class="carousel-dot" onclick="goToHeroSlide(1)"></div>
+        <div class="carousel-dot" onclick="goToHeroSlide(2)"></div>
+        <div class="carousel-dot" onclick="goToHeroSlide(3)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DEPARTMENT SECTION 1: HIGH-PERFORMANCE ELECTRONICS (8 PRODUCTS)
+       ========================================================================== -->
+  <section class="department-section" id="electronicsDept">
+    <div class="container">
+      <div class="dept-header-row">
+        <div class="dept-title-group">
+          <h2><i class="fa-solid fa-bolt" style="color:var(--brand-indigo);"></i> High-Performance Electronics & Audio</h2>
+          <p>Lossless wireless acoustics, CNC mechanical inputs, and titanium telemetry smartwatches</p>
+        </div>
+        <a class="dept-view-all-link" onclick="scrollToSection('electronicsDept')">
+          <span>8 Active Products</span> <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="dept-grid" id="gridElectronics">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DEPARTMENT SECTION 2: BESPOKE LUXURY APPAREL & FOOTWEAR (8 PRODUCTS)
+       ========================================================================== -->
+  <section class="department-section" id="fashionDept">
+    <div class="container">
+      <div class="dept-header-row">
+        <div class="dept-title-group">
+          <h2><i class="fa-solid fa-shirt" style="color:var(--brand-pink);"></i> Bespoke Luxury Apparel & Footwear</h2>
+          <p>Pure Mongolian cashmere knits, Tuscan suede Chelsea boots, andVacchetta leather tote bags</p>
+        </div>
+        <a class="dept-view-all-link" onclick="scrollToSection('fashionDept')">
+          <span>8 Active Products</span> <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="dept-grid" id="gridFashion">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DEPARTMENT SECTION 3: HAUTE HOROLOGY & ACCESSORIES (8 PRODUCTS)
+       ========================================================================== -->
+  <section class="department-section" id="watchesDept">
+    <div class="container">
+      <div class="dept-header-row">
+        <div class="dept-title-group">
+          <h2><i class="fa-solid fa-gem" style="color:var(--brand-amber);"></i> Haute Horology, Leather & Accessories</h2>
+          <p>Sapphire automatic chronographs, Mazzucchelli acetate eyewear, and Grade-5 titanium EDC</p>
+        </div>
+        <a class="dept-view-all-link" onclick="scrollToSection('watchesDept')">
+          <span>8 Active Products</span> <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="dept-grid" id="gridWatches">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DEPARTMENT SECTION 4: MODERN HOME & CIRCADIAN LIVING (6 PRODUCTS)
+       ========================================================================== -->
+  <section class="department-section" id="homeDept">
+    <div class="container">
+      <div class="dept-header-row">
+        <div class="dept-title-group">
+          <h2><i class="fa-solid fa-couch" style="color:var(--brand-cyan);"></i> Modern Home, Aesthetics & Living</h2>
+          <p>Ultrasonic ceramic diffusers, pour-over stoneware carafes, and sculptural warm brass lighting</p>
+        </div>
+        <a class="dept-view-all-link" onclick="scrollToSection('homeDept')">
+          <span>6 Active Products</span> <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="dept-grid" id="gridHome">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VERIFIED CLIENT REVIEWS & COMMUNITY FEEDBACK (WITH WRITE REVIEW SYSTEM)
+       ========================================================================== -->
+  <section class="reviews-section" id="reviewsSection">
+    <div class="container">
+      <div class="dept-header-row" style="margin-bottom:2rem;">
+        <div class="dept-title-group">
+          <h2><i class="fa-solid fa-star" style="color:var(--brand-amber);"></i> Client Reviews & Verified Feedback</h2>
+          <p>Authentic reviews from verified collectors, audio enthusiasts, and style connoisseurs worldwide</p>
+        </div>
+        <button class="btn-luxe btn-luxe-primary" onclick="openReviewModal()">
+          <i class="fa-solid fa-pen-to-square"></i> Write a Review
+        </button>
+      </div>
+
+      <!-- Rating Breakdown Card -->
+      <div class="reviews-summary-card">
+        <div class="score-box-col">
+          <div class="score-big" id="aggregateRatingScore">4.94</div>
+          <div class="score-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-secondary);">
+            Based on <strong id="totalReviewsCount">3,480</strong> verified buyer ratings
+          </div>
+        </div>
+
+        <div class="score-breakdown-col">
+          <div class="bar-line-row">
+            <span style="width:50px;">5 Stars</span>
+            <div class="bar-line-track"><div class="bar-line-fill" style="width: 92%;"></div></div>
+            <span style="width:35px; text-align:right;">92%</span>
+          </div>
+          <div class="bar-line-row">
+            <span style="width:50px;">4 Stars</span>
+            <div class="bar-line-track"><div class="bar-line-fill" style="width: 6%;"></div></div>
+            <span style="width:35px; text-align:right;">6%</span>
+          </div>
+          <div class="bar-line-row">
+            <span style="width:50px;">3 Stars</span>
+            <div class="bar-line-track"><div class="bar-line-fill" style="width: 1.5%;"></div></div>
+            <span style="width:35px; text-align:right;">1.5%</span>
+          </div>
+          <div class="bar-line-row">
+            <span style="width:50px;">2 Stars</span>
+            <div class="bar-line-track"><div class="bar-line-fill" style="width: 0.5%;"></div></div>
+            <span style="width:35px; text-align:right;">0.5%</span>
+          </div>
+        </div>
+
+        <div class="review-action-col">
+          <h4 style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; margin-bottom:0.5rem;">Have You Received an Order?</h4>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1.25rem;">Share your experience to help fellow collectors and unlock a 10% secret voucher.</p>
+          <button class="btn-luxe btn-luxe-secondary" style="font-size:0.85rem; padding:0.65rem 1.5rem;" onclick="openReviewModal()">
+            Submit Your Feedback
+          </button>
+        </div>
+      </div>
+
+      <!-- Reviews Cards Grid -->
+      <div class="reviews-cards-grid" id="reviewsContainer">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE FAQ ACCORDION SECTION
+       ========================================================================== -->
+  <section class="faq-section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:3rem;">
+        <h2 style="font-family:var(--font-display); font-size:2.25rem; font-weight:800; margin-bottom:0.5rem;">
+          Frequently Asked Questions
+        </h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem;">
+          Everything you need to know about our sourcing, authenticity, and white-glove delivery
+        </p>
+      </div>
+
+      <div class="faq-accordion-box">
+        <div class="faq-item open">
+          <button class="faq-question-btn" onclick="toggleFaq(this)">
+            <span>Are all LuxeMart Neo products 100% authentic with warranty?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Yes, without exception. Every single timepiece, leather creation, and acoustic audio device is sourced directly from certified ateliers and official authorized manufacture distributors. Each piece arrives in tamper-sealed archive packaging accompanied by an individually serialized authenticity certificate and a 2-year manufacturer warranty.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question-btn" onclick="toggleFaq(this)">
+            <span>How fast is worldwide delivery, and how do I track my order?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Orders placed before 2:00 PM EST are dispatched the same business day. We partner with DHL Express and FedEx Priority Air for guaranteed delivery within 2 to 4 business days worldwide. You will receive real-time SMS & email notifications, and you can also track your package in our interactive live Orders Dashboard.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question-btn" onclick="toggleFaq(this)">
+            <span>What is your return & exchange policy?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            We offer an unconditional 30-day white-glove return policy. If you are not thoroughly enamored with your acquisition, initiate a return via your dashboard, and our authorized courier will pick up the parcel directly from your doorstep with zero restocking fees.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question-btn" onclick="toggleFaq(this)">
+            <span>Which payment methods and digital wallets do you support?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            We support 256-bit SSL encrypted transactions through Visa, Mastercard, American Express, Apple Pay, Cash on Delivery (COD) in eligible metropolitan regions, and localized digital mobile accounts including JazzCash and Easypaisa.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="luxe-footer">
+    <div class="container">
+      <div class="footer-columns-grid">
+        <div>
+          <a href="#" class="brand-logo" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+            <div class="brand-icon-halo">
+              <i class="fa-solid fa-gem"></i>
+            </div>
+            <span>Luxe<span class="brand-text-grad">Mart</span> Neo</span>
+          </a>
+          <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:1.15rem; line-height:1.7; max-width:340px;">
+            The world's premier vanguard in curated high-fidelity sound, Swiss horology, bespoke runway cashmere, and modern circadian living.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-family:var(--font-display); font-weight:800; margin-bottom:1.25rem;">Departments</h4>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem; font-size:0.88rem; color:var(--text-secondary);">
+            <li><a href="#electronicsDept" onclick="scrollToSection('electronicsDept')">Electronics & Audio</a></li>
+            <li><a href="#fashionDept" onclick="scrollToSection('fashionDept')">Bespoke Apparel</a></li>
+            <li><a href="#watchesDept" onclick="scrollToSection('watchesDept')">Timepieces & Leather</a></li>
+            <li><a href="#homeDept" onclick="scrollToSection('homeDept')">Circadian Home Decor</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-family:var(--font-display); font-weight:800; margin-bottom:1.25rem;">Concierge</h4>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem; font-size:0.88rem; color:var(--text-secondary);">
+            <li><a href="#" onclick="openOrdersModal()">Track My Order</a></li>
+            <li><a href="#" onclick="openReviewModal()">Submit Feedback</a></li>
+            <li><a href="#" onclick="openWishlistDrawer()">Saved Archive (Wishlist)</a></li>
+            <li><a href="#" onclick="showToastNotification('Concierge: concierge@luxemart.neo', 'info')">VIP Support</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-family:var(--font-display); font-weight:800; margin-bottom:1.25rem;">Global Flagships</h4>
+          <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
+            Experience our private ateliers in SoHo New York, Mayfair London, Ginza Tokyo, and Dubai DIFC.
+          </p>
+          <div style="font-size:0.85rem; color:var(--text-secondary);">
+            <i class="fa-solid fa-location-dot" style="color:var(--brand-indigo); margin-right:6px;"></i> 520 Broadway, SoHo, NY 10012
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--border-subtle); padding-top:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.25rem; font-size:0.85rem; color:var(--text-muted);">
+        <div>
+          &copy; <span id="yearCopyright">2026</span> LuxeMart Neo Group Ltd. Designed with modern HTML5, CSS3, & Vanilla ES6+.
+        </div>
+        <div style="display:flex; gap:1.25rem; font-size:1.6rem; color:var(--text-muted);">
+          <i class="fa-brands fa-cc-visa" title="Visa"></i>
+          <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+          <i class="fa-brands fa-cc-apple-pay" title="Apple Pay"></i>
+          <i class="fa-solid fa-mobile-retro" title="Mobile Wallets"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MOBILE BOTTOM STICKY NAVIGATION BAR
+       ========================================================================== -->
+  <div class="mobile-bottom-bar">
+    <div class="mobile-bar-btn active" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </div>
+    <div class="mobile-bar-btn" onclick="scrollToSection('electronicsDept')">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Tech</span>
+    </div>
+    <div class="mobile-bar-btn" onclick="openWishlistDrawer()">
+      <i class="fa-regular fa-heart"></i>
+      <span>Saved</span>
+    </div>
+    <div class="mobile-bar-btn" onclick="openCartDrawer()">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span>Bag</span>
+    </div>
+    <div class="mobile-bar-btn" onclick="openOrdersModal()">
+      <i class="fa-solid fa-receipt"></i>
+      <span>Orders</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: QUICK VIEW
+       ========================================================================== -->
+  <div class="modal-overlay" id="quickViewOverlay">
+    <div class="modal-window">
+      <button class="modal-dismiss-btn" onclick="closeQuickViewModal()" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="quickViewModalContent" style="padding:2.5rem;"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DRAWER: CART SLIDE-OUT
+       ========================================================================== -->
+  <div class="drawer-overlay" id="cartDrawerOverlay">
+    <div class="drawer-slider">
+      <div class="drawer-head">
+        <h3>
+          <i class="fa-solid fa-bag-shopping" style="color:var(--brand-indigo);"></i>
+          <span>Your Bag (<span id="cartDrawerCountText">0</span>)</span>
+        </h3>
+        <button class="modal-dismiss-btn" style="position:static;" onclick="closeCartDrawer()" title="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="free-shipping-meter">
+        <div class="fs-text-row">
+          <span id="fsStatusText">Add $50.00 more for FREE Shipping!</span>
+          <span id="fsPercentText" style="color:var(--brand-indigo);">0%</span>
+        </div>
+        <div class="fs-bar-track">
+          <div class="fs-bar-fill" id="fsBarFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="drawer-items-scroll" id="cartDrawerItems"></div>
+
+      <div class="drawer-bottom-card" id="cartDrawerFooter">
+        <div style="display:flex; gap:0.65rem; margin-bottom:1.25rem;">
+          <input type="text" id="promoVoucherInput" style="flex:1; background:var(--bg-input); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:0.65rem 1rem; font-weight:700; text-transform:uppercase;" placeholder="Promo code (e.g. FLASH20)">
+          <button class="btn-luxe btn-luxe-secondary" style="padding:0 1.25rem; font-size:0.85rem;" onclick="applyPromoVoucher()">Apply</button>
+        </div>
+        <div id="promoResultNote" style="font-size:0.78rem; margin-top:-0.75rem; margin-bottom:0.75rem; display:none;"></div>
+
+        <div style="display:flex; flex-direction:column; gap:0.55rem; margin-bottom:1.5rem; font-size:0.92rem; color:var(--text-secondary);">
+          <div style="display:flex; justify-content:space-between;">
+            <span>Subtotal</span>
+            <span id="billSubtotalVal">$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; display:none; color:var(--brand-pink);" id="voucherRow">
+            <span>Voucher Discount</span>
+            <span id="billDiscountVal">-$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span>Express Delivery</span>
+            <span id="billShippingVal">$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span>Estimated Sales Tax (5%)</span>
+            <span id="billTaxVal">$0.00</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-family:var(--font-display); font-size:1.35rem; font-weight:800; color:var(--text-primary); border-top:1px dashed var(--border-medium); padding-top:0.75rem; margin-top:0.35rem;">
+            <span>Grand Total</span>
+            <span id="billGrandTotalVal" style="color:var(--brand-indigo);">$0.00</span>
+          </div>
+        </div>
+
+        <button class="btn-luxe btn-luxe-primary" style="width:100%; font-size:1rem; padding:1rem;" onclick="launchCheckoutFlow()">
+          <span>Proceed to Checkout</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DRAWER: WISHLIST
+       ========================================================================== -->
+  <div class="drawer-overlay" id="wishlistDrawerOverlay">
+    <div class="drawer-slider">
+      <div class="drawer-head">
+        <h3>
+          <i class="fa-solid fa-heart" style="color:var(--brand-rose);"></i>
+          <span>Saved Archive (<span id="wishlistCountText">0</span>)</span>
+        </h3>
+        <button class="modal-dismiss-btn" style="position:static;" onclick="closeWishlistDrawer()" title="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="drawer-items-scroll" id="wishlistDrawerItems"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: MULTI-STEP CHECKOUT
+       ========================================================================== -->
+  <div class="modal-overlay" id="checkoutModalOverlay">
+    <div class="modal-window checkout-flow-modal">
+      <button class="modal-dismiss-btn" onclick="closeCheckoutModal()" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="checkout-steps-nav">
+        <div class="nav-step-item active" id="chkStepNode1"><div class="step-badge-circ">1</div><span>Contact</span></div>
+        <div class="nav-step-item" id="chkStepNode2"><div class="step-badge-circ">2</div><span>Shipping</span></div>
+        <div class="nav-step-item" id="chkStepNode3"><div class="step-badge-circ">3</div><span>Payment</span></div>
+        <div class="nav-step-item" id="chkStepNode4"><div class="step-badge-circ">4</div><span>Review</span></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step-page-body active-page" id="chkPage1">
+        <h3 style="font-family:var(--font-display); font-size:1.45rem; margin-bottom:1.5rem;">1. Client Credentials</h3>
+        <div class="form-row-2">
+          <div class="form-field-group">
+            <label for="chkFirstName">First Name *</label>
+            <input type="text" id="chkFirstName" class="form-input-control" value="Alexander">
+          </div>
+          <div class="form-field-group">
+            <label for="chkLastName">Last Name *</label>
+            <input type="text" id="chkLastName" class="form-input-control" value="Vance">
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field-group">
+            <label for="chkEmail">Email Address *</label>
+            <input type="email" id="chkEmail" class="form-input-control" value="alexander.vance@luxemart.neo">
+          </div>
+          <div class="form-field-group">
+            <label for="chkPhone">Direct Phone *</label>
+            <input type="tel" id="chkPhone" class="form-input-control" value="+1 (555) 948-2041">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-page-body" id="chkPage2">
+        <h3 style="font-family:var(--font-display); font-size:1.45rem; margin-bottom:1.5rem;">2. Shipping Destination</h3>
+        <div class="form-field-group">
+          <label for="chkAddress">Street & Residence *</label>
+          <input type="text" id="chkAddress" class="form-input-control" value="740 Park Avenue, Penthouse 18">
+        </div>
+        <div class="form-row-2">
+          <div class="form-field-group">
+            <label for="chkCity">City *</label>
+            <input type="text" id="chkCity" class="form-input-control" value="New York">
+          </div>
+          <div class="form-field-group">
+            <label for="chkPostal">Postal / ZIP Code *</label>
+            <input type="text" id="chkPostal" class="form-input-control" value="10021">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-page-body" id="chkPage3">
+        <h3 style="font-family:var(--font-display); font-size:1.45rem; margin-bottom:1.5rem;">3. Payment Authorization</h3>
+        <div class="pay-methods-grid">
+          <div class="pay-card-option active-method" onclick="choosePaymentType('card', this)">
+            <i class="fa-regular fa-credit-card"></i>
+            <h5>Credit / Debit Card</h5>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Visa, MC, Amex</span>
+          </div>
+          <div class="pay-card-option" onclick="choosePaymentType('cod', this)">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <h5>Cash on Delivery</h5>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Pay upon arrival</span>
+          </div>
+          <div class="pay-card-option" onclick="choosePaymentType('wallet', this)">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <h5>Easypaisa / JazzCash</h5>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Digital Wallets</span>
+          </div>
+        </div>
+
+        <div id="cardFieldsContainer">
+          <div class="visual-card-preview">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="visual-card-chip"></span>
+              <span style="font-family:var(--font-display); font-weight:800; font-size:1.15rem; font-style:italic;">LUXE PAY</span>
+            </div>
+            <div style="font-family:monospace; font-size:1.25rem; letter-spacing:0.15em;" id="previewCardNumber">4242 •••• •••• 4242</div>
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+              <div><span>ALEXANDER VANCE</span></div>
+              <div><span>12/28</span></div>
+            </div>
+          </div>
+          <div class="form-field-group">
+            <label>Card Number</label>
+            <input type="text" class="form-input-control" value="4242 8891 2049 4242" maxlength="19" oninput="formatCardNumber(this)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-page-body" id="chkPage4">
+        <h3 style="font-family:var(--font-display); font-size:1.45rem; margin-bottom:1.5rem;">4. Final Verification</h3>
+        <div style="background:var(--bg-surface-elevated); border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:1.5rem; margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.75rem; font-size:0.9rem;">
+            <span style="color:var(--text-muted);">Recipient:</span>
+            <strong id="chkSummaryName">Alexander Vance</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.75rem; font-size:0.9rem;">
+            <span style="color:var(--text-muted);">Destination:</span>
+            <strong id="chkSummaryAddress">740 Park Avenue, NY 10021</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:1.35rem; font-family:var(--font-display); font-weight:800; border-top:1px dashed var(--border-medium); padding-top:0.85rem; margin-top:0.85rem;">
+            <span>Grand Total:</span>
+            <span id="chkSummaryTotal" style="color:var(--brand-indigo);">$0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:1.25rem 2.5rem; border-top:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center; background:var(--bg-surface-elevated);">
+        <button class="btn-luxe btn-luxe-secondary" id="chkPrevBtn" onclick="goPreviousCheckoutStep()" style="display:none;">
+          <i class="fa-solid fa-arrow-left"></i> Back
+        </button>
+        <div style="margin-left:auto; display:flex; gap:0.75rem;">
+          <button class="btn-luxe btn-luxe-primary" id="chkNextBtn" onclick="goNextCheckoutStep()">
+            Continue <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <button class="btn-luxe btn-luxe-primary" id="chkSubmitBtn" onclick="executeOrderPlacement()" style="display:none; background:var(--brand-emerald);">
+            <i class="fa-solid fa-lock"></i> Authorize & Place Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: ORDER SUCCESS & RECEIPT
+       ========================================================================== -->
+  <div class="modal-overlay" id="orderSuccessOverlay">
+    <div class="modal-window" style="max-width:540px;">
+      <div style="text-align:center; padding:3rem 2rem;">
+        <div style="width:76px; height:76px; border-radius:50%; background:rgba(16, 185, 129, 0.15); color:var(--brand-emerald); display:flex; align-items:center; justify-content:center; font-size:2.5rem; margin:0 auto 1.5rem;">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h2 style="font-family:var(--font-display); font-size:1.95rem; font-weight:800; margin-bottom:0.5rem;">
+          Order Confirmed!
+        </h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1.5rem;">
+          Your order has been authorized and dispatched to our packing atelier.
+        </p>
+
+        <div style="display:inline-block; background:var(--bg-surface-elevated); border:1px dashed var(--brand-indigo); padding:0.5rem 1.5rem; border-radius:var(--radius-md); font-family:monospace; font-size:1.15rem; font-weight:800; color:var(--text-accent); margin-bottom:1.5rem;" id="receiptTrackingId">
+          #ORD-2026-89421
+        </div>
+
+        <div style="display:flex; gap:0.75rem; justify-content:center;">
+          <button class="btn-luxe btn-luxe-secondary" onclick="window.print()">
+            <i class="fa-solid fa-print"></i> Print Receipt
+          </button>
+          <button class="btn-luxe btn-luxe-primary" onclick="closeSuccessAndOpenTracker()">
+            <i class="fa-solid fa-clock-rotate-left"></i> Track in Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: CUSTOMER & ADMIN ORDERS DASHBOARD
+       ========================================================================== -->
+  <div class="modal-overlay" id="ordersTrackerOverlay">
+    <div class="modal-window" style="max-width:880px;">
+      <button class="modal-dismiss-btn" onclick="closeOrdersModal()" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div style="padding:2.25rem 2.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-family:var(--font-display); font-size:1.85rem; font-weight:800;">
+              <i class="fa-solid fa-boxes-stacked" style="color:var(--brand-indigo); margin-right:8px;"></i>
+              Orders & Deliveries Vault
+            </h2>
+            <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.25rem;">
+              Track deliveries in real-time, simulate status transitions, or submit product reviews for delivered orders.
+            </p>
+          </div>
+          <button class="btn-luxe btn-luxe-secondary" style="font-size:0.82rem; padding:0.5rem 1rem;" onclick="generateSampleOrderRecord()">
+            <i class="fa-solid fa-plus"></i> Simulate New Order
+          </button>
+        </div>
+
+        <div id="ordersRecordList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: WRITE A CLIENT REVIEW
+       ========================================================================== -->
+  <div class="modal-overlay" id="writeReviewOverlay">
+    <div class="modal-window" style="max-width:620px;">
+      <button class="modal-dismiss-btn" onclick="closeReviewModal()" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div style="padding:2.5rem;">
+        <h2 style="font-family:var(--font-display); font-size:1.85rem; font-weight:800; margin-bottom:0.35rem;">
+          Write a Verified Review
+        </h2>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem;">
+          Help fellow collectors by sharing your tactile impressions and experience.
+        </p>
+
+        <form id="clientReviewForm" onsubmit="submitClientReview(event)">
+          <div class="form-field-group">
+            <label>Select Product *</label>
+            <select id="reviewProductSelect" class="form-input-control" required style="cursor:pointer;">
+              <!-- Populated dynamically via JS -->
+            </select>
+          </div>
+
+          <div class="form-field-group">
+            <label>Overall Star Rating *</label>
+            <div class="star-rating-picker" id="starPicker">
+              <i class="fa-solid fa-star active-star" data-rating="1" onclick="setStarRating(1)"></i>
+              <i class="fa-solid fa-star active-star" data-rating="2" onclick="setStarRating(2)"></i>
+              <i class="fa-solid fa-star active-star" data-rating="3" onclick="setStarRating(3)"></i>
+              <i class="fa-solid fa-star active-star" data-rating="4" onclick="setStarRating(4)"></i>
+              <i class="fa-solid fa-star active-star" data-rating="5" onclick="setStarRating(5)"></i>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-field-group">
+              <label for="reviewAuthorName">Your Full Name *</label>
+              <input type="text" id="reviewAuthorName" class="form-input-control" placeholder="e.g. Liam Sterling" required>
+            </div>
+            <div class="form-field-group">
+              <label for="reviewAuthorCity">Your City / Country *</label>
+              <input type="text" id="reviewAuthorCity" class="form-input-control" placeholder="e.g. Geneva, Switzerland" required>
+            </div>
+          </div>
+
+          <div class="form-field-group">
+            <label for="reviewCommentText">Detailed Review *</label>
+            <textarea id="reviewCommentText" class="form-input-control" rows="4" placeholder="Detail the craftsmanship, fit, soundstage, or packaging..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-luxe btn-luxe-primary" style="width:100%; margin-top:0.5rem;">
+            <i class="fa-solid fa-paper-plane"></i> Publish Verified Review
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       LIVE SOCIAL PROOF TICKER & TOAST STACK
+       ========================================================================== -->
+  <div class="live-social-proof" id="socialProofPopup">
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=150&q=80" alt="Item" class="social-proof-avatar" id="socialProofImg">
+    <div>
+      <div style="font-size:0.75rem; color:var(--brand-emerald); font-weight:800;">
+        <i class="fa-solid fa-circle-check"></i> VERIFIED ORDER DELIVERED
+      </div>
+      <div style="font-size:0.82rem; font-weight:700;" id="socialProofText">Someone in London purchased Chronos Sapphire</div>
+      <div style="font-size:0.72rem; color:var(--text-muted);" id="socialProofTime">2 minutes ago</div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toastStackContainer"></div>
+
+  <!-- ==========================================================================
+       MASTER ES6+ JAVASCRIPT APPLICATION CODE
+       ========================================================================== -->
+  <script>
+    /**
+     * ============================================================================
+     * LUXEMART NEO - MASTER ARCHITECTURE (ES6+)
+     * Dynamic Hero Slider, Multi-Department Showcase, Verified Reviews System
+     * ============================================================================
+     */
+
+    // 1. Comprehensive 28+ Products Dataset
+    const ALL_PRODUCTS = [
+      // ELECTRONICS (8 Items)
+      {
+        id: 1,
+        title: "Aura Pro Wireless ANC Studio Headphones",
+        category: "Electronics",
+        basePriceUSD: 249.99,
+        originalPriceUSD: 349.99,
+        rating: 4.95,
+        reviewsCount: 312,
+        stockCount: 4,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
+        thumbnails: [
+          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
+          "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80"
+        ],
+        colors: ["#0f172a", "#f8fafc"],
+        sizes: ["Studio Standard"],
+        desc: "Custom 45mm graphene drivers, hybrid adaptive noise cancellation, 40-hour lossless playback, memory-foam lambskin."
+      },
+      {
+        id: 5,
+        title: "Vanguard Low-Profile CNC Aluminum Keyboard",
+        category: "Electronics",
+        basePriceUSD: 139.00,
+        originalPriceUSD: 179.00,
+        rating: 4.92,
+        reviewsCount: 420,
+        stockCount: 12,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80"],
+        colors: ["#1e293b", "#ffffff"],
+        sizes: ["Linear Red", "Tactile Brown"],
+        desc: "Milled 6063 aerospace aluminum chassis, hot-swappable switches, sound dampening foam, Bluetooth 5.2 tri-mode."
+      },
+      {
+        id: 9,
+        title: "Titanium Obsidian Smartwatch Series Telemetry X",
+        category: "Electronics",
+        basePriceUSD: 329.99,
+        originalPriceUSD: 420.00,
+        rating: 4.96,
+        reviewsCount: 520,
+        stockCount: 3,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80"],
+        colors: ["#020617", "#ea580c"],
+        sizes: ["45mm Titanium"],
+        desc: "Grade-5 titanium case, always-on LTPO OLED retina display, optical ECG biosensors, and 7-day battery stamina."
+      },
+      {
+        id: 13,
+        title: "Nova True Wireless Earbuds with MagCharge",
+        category: "Electronics",
+        basePriceUSD: 119.00,
+        originalPriceUSD: 160.00,
+        rating: 4.85,
+        reviewsCount: 190,
+        stockCount: 16,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80"],
+        colors: ["#090d16", "#f8fafc"],
+        sizes: ["Compact Pods"],
+        desc: "Spatial audio tracking, dual beamforming microphones, IPX7 water resistance, 32-hour magnetic battery case."
+      },
+      {
+        id: 14,
+        title: "Cyberpunk Hex Minimalist Ambient Desktop Lamp",
+        category: "Electronics",
+        basePriceUSD: 79.00,
+        originalPriceUSD: 110.00,
+        rating: 4.79,
+        reviewsCount: 85,
+        stockCount: 9,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1517991104123-1d56a6e81ed9?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1517991104123-1d56a6e81ed9?w=800&q=80"],
+        colors: ["#0f172a", "#6366f1"],
+        sizes: ["Standard"],
+        desc: "Addressable reactive ambient lighting with sound visualization mode and smart home wireless pairing."
+      },
+      {
+        id: 15,
+        title: "Apex 4K Cine-Stabilized Portable Drone",
+        category: "Electronics",
+        basePriceUSD: 449.00,
+        originalPriceUSD: 599.00,
+        rating: 4.91,
+        reviewsCount: 140,
+        stockCount: 5,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=800&q=80"],
+        colors: ["#475569", "#0f172a"],
+        sizes: ["Fly More Kit"],
+        desc: "3-axis mechanical gimbal, 4K 60fps HDR video, 10km transmission range, and obstacle sensing suite."
+      },
+      {
+        id: 16,
+        title: "Aura Hi-Res Magnetic 20000mAh Power Vault",
+        category: "Electronics",
+        basePriceUSD: 65.00,
+        originalPriceUSD: 90.00,
+        rating: 4.88,
+        reviewsCount: 260,
+        stockCount: 22,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1609592426815-e23a9a103c80?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1609592426815-e23a9a103c80?w=800&q=80"],
+        colors: ["#1e293b", "#e2e8f0"],
+        sizes: ["20000mAh"],
+        desc: "Aircraft aluminum casing, 65W GaN dual Type-C output, and smart OLED telemetry battery readout."
+      },
+      {
+        id: 17,
+        title: "Resonance Smart 360 Acoustic Room Speaker",
+        category: "Electronics",
+        basePriceUSD: 189.00,
+        originalPriceUSD: 240.00,
+        rating: 4.87,
+        reviewsCount: 115,
+        stockCount: 8,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&q=80"],
+        colors: ["#334155", "#0f172a"],
+        sizes: ["Home Acoustic"],
+        desc: "Omnidirectional balanced acoustic chamber, dual passive bass radiators, and wireless multi-room sync."
+      },
+
+      // FASHION & APPAREL (8 Items)
+      {
+        id: 3,
+        title: "Bespoke Italian Leather Minimalist Executive Tote",
+        category: "Fashion",
+        basePriceUSD: 189.50,
+        originalPriceUSD: 245.00,
+        rating: 4.88,
+        reviewsCount: 94,
+        stockCount: 8,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80"],
+        colors: ["#78350f", "#0f172a"],
+        sizes: ["One Size"],
+        desc: "Full-grain Vacchetta leather handcrafted in Florence, solid brass hardware, internal padded laptop divider."
+      },
+      {
+        id: 7,
+        title: "Grade-A Mongolian Cashmere Relaxed Crewneck Knit",
+        category: "Fashion",
+        basePriceUSD: 145.00,
+        originalPriceUSD: 210.00,
+        rating: 4.89,
+        reviewsCount: 88,
+        stockCount: 7,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"],
+        colors: ["#e2e8f0", "#334155"],
+        sizes: ["S", "M", "L", "XL"],
+        desc: "100% 2-ply Mongolian cashmere fibers. Naturally breathable with superior thermal insulation and soft touch."
+      },
+      {
+        id: 10,
+        title: "Tuscan Suede Blake-Stitched Heritage Chelsea Boots",
+        category: "Fashion",
+        basePriceUSD: 219.00,
+        originalPriceUSD: 299.00,
+        rating: 4.86,
+        reviewsCount: 110,
+        stockCount: 6,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=800&q=80"],
+        colors: ["#78350f", "#1e293b"],
+        sizes: ["41 EU", "42 EU", "43 EU", "44 EU"],
+        desc: "Hydrophobic calf suede from Tuscany, Blake-stitch construction with natural crepe rubber outsoles."
+      },
+      {
+        id: 18,
+        title: "Milanese Tailored Heavy Linen Resort Overshirt",
+        category: "Fashion",
+        basePriceUSD: 110.00,
+        originalPriceUSD: 155.00,
+        rating: 4.83,
+        reviewsCount: 65,
+        stockCount: 11,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80"],
+        colors: ["#f8fafc", "#cbd5e1"],
+        sizes: ["M", "L", "XL"],
+        desc: "100% Normandy flax linen tailored with mother-of-pearl buttons and relaxed unstructured shoulder."
+      },
+      {
+        id: 19,
+        title: "Japanese 14oz Selvedge Denim Tailored Jeans",
+        category: "Fashion",
+        basePriceUSD: 175.00,
+        originalPriceUSD: 230.00,
+        rating: 4.93,
+        reviewsCount: 140,
+        stockCount: 8,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1542272604-780c96856592?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1542272604-780c96856592?w=800&q=80"],
+        colors: ["#1e1b4b"],
+        sizes: ["30x32", "32x32", "34x32"],
+        desc: "Woven in Okayama on vintage shuttle looms. Raw indigo dyed with pink selvedge ID line and copper rivets."
+      },
+      {
+        id: 20,
+        title: "Velvet Suede Minimalist Archive Bomber Jacket",
+        category: "Fashion",
+        basePriceUSD: 285.00,
+        originalPriceUSD: 395.00,
+        rating: 4.94,
+        reviewsCount: 80,
+        stockCount: 5,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80"],
+        colors: ["#78350f", "#090d16"],
+        sizes: ["S", "M", "L"],
+        desc: "Sumptuous goat suede leather, satin cupro lining, heavy-gauge two-way YKK Excella zippers."
+      },
+      {
+        id: 21,
+        title: "Silk-Cotton Knit Relaxed Collarless Polo",
+        category: "Fashion",
+        basePriceUSD: 95.00,
+        originalPriceUSD: 135.00,
+        rating: 4.80,
+        reviewsCount: 52,
+        stockCount: 14,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80"],
+        colors: ["#334155", "#e2e8f0"],
+        sizes: ["M", "L", "XL"],
+        desc: "55% mulberry silk blended with 45% long-staple cotton for effortless drape and cool touch."
+      },
+      {
+        id: 22,
+        title: "Technical Wind-Shield Weatherproof Parka",
+        category: "Fashion",
+        basePriceUSD: 220.00,
+        originalPriceUSD: 310.00,
+        rating: 4.88,
+        reviewsCount: 95,
+        stockCount: 9,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1544923246-77307dd654cb?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1544923246-77307dd654cb?w=800&q=80"],
+        colors: ["#0f172a", "#334155"],
+        sizes: ["M", "L", "XL"],
+        desc: "3-layer membrane waterproof fabric, fully seam-sealed with storm hood and Fidlock magnetic clips."
+      },
+
+      // ACCESSORIES & WATCHES (8 Items)
+      {
+        id: 2,
+        title: "Chronos Sapphire Automatic Mechanical Chronograph",
+        category: "Accessories",
+        basePriceUSD: 399.00,
+        originalPriceUSD: 580.00,
+        rating: 4.98,
+        reviewsCount: 184,
+        stockCount: 6,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80"],
+        colors: ["#1e293b", "#b45309"],
+        sizes: ["40mm", "42mm"],
+        desc: "28,800 vph Swiss-standard automatic movement, dual AR-coated sapphire crystal, 100m water resistance."
+      },
+      {
+        id: 6,
+        title: "Artisan Handcrafted Polarized Mazzucchelli Sunglasses",
+        category: "Accessories",
+        basePriceUSD: 115.00,
+        originalPriceUSD: 165.00,
+        rating: 4.78,
+        reviewsCount: 142,
+        stockCount: 5,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&q=80"],
+        colors: ["#090d16", "#78350f"],
+        sizes: ["Universal Fit"],
+        desc: "Italian organic cellulose acetate frames fitted with Category 3 CR-39 polarized lenses, UV400."
+      },
+      {
+        id: 12,
+        title: "Aerospace Grade 5 Titanium Tactical Carabiner EDC",
+        category: "Accessories",
+        basePriceUSD: 45.00,
+        originalPriceUSD: 65.00,
+        rating: 4.84,
+        reviewsCount: 230,
+        stockCount: 28,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1622434641406-a158123450f9?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1622434641406-a158123450f9?w=800&q=80"],
+        colors: ["#64748b", "#0f172a"],
+        sizes: ["Compact EDC"],
+        desc: "Monolithic Grade-5 titanium billet wire-EDM cut, bottle lever, and magnetic bit holder."
+      },
+      {
+        id: 23,
+        title: "Full-Grain Leather Minimalist RFID Card Wallet",
+        category: "Accessories",
+        basePriceUSD: 55.00,
+        originalPriceUSD: 75.00,
+        rating: 4.90,
+        reviewsCount: 310,
+        stockCount: 19,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&q=80"],
+        colors: ["#78350f", "#0f172a"],
+        sizes: ["Slim Bifold"],
+        desc: "Holds 8 cards plus cash folded, lined with military-grade RFID blocking woven fabric."
+      },
+      {
+        id: 24,
+        title: "Heritage Weekender Waxed Canvas Duffel Bag",
+        category: "Accessories",
+        basePriceUSD: 165.00,
+        originalPriceUSD: 230.00,
+        rating: 4.89,
+        reviewsCount: 77,
+        stockCount: 7,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"],
+        colors: ["#334155", "#78350f"],
+        sizes: ["45L Cabin"],
+        desc: "Waterproof 18oz Scottish waxed cotton duck canvas, solid brass studs and detachable leather strap."
+      },
+      {
+        id: 25,
+        title: "Bespoke Horology Handcrafted Watch Travel Roll",
+        category: "Accessories",
+        basePriceUSD: 85.00,
+        originalPriceUSD: 120.00,
+        rating: 4.92,
+        reviewsCount: 64,
+        stockCount: 12,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80"],
+        colors: ["#78350f", "#0f172a"],
+        sizes: ["3 Timepieces"],
+        desc: "Saffiano leather exterior, individual slide-in cushioned compartments lined in velvet suede."
+      },
+      {
+        id: 26,
+        title: "Hand-Braided Tuscan Leather Cuff Bracelet",
+        category: "Accessories",
+        basePriceUSD: 42.00,
+        originalPriceUSD: 60.00,
+        rating: 4.76,
+        reviewsCount: 118,
+        stockCount: 25,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1611591475870-07bf1ef25876?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1611591475870-07bf1ef25876?w=800&q=80"],
+        colors: ["#78350f", "#090d16"],
+        sizes: ["Medium", "Large"],
+        desc: "Eight-strand braided Italian calfskin paired with magnetic matte brushed steel closure."
+      },
+      {
+        id: 27,
+        title: "Sterling Silver Minimalist Geometric Signet Ring",
+        category: "Accessories",
+        basePriceUSD: 68.00,
+        originalPriceUSD: 95.00,
+        rating: 4.82,
+        reviewsCount: 88,
+        stockCount: 14,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"],
+        colors: ["#e2e8f0"],
+        sizes: ["US 9", "US 10", "US 11"],
+        desc: "Solid 925 sterling silver with rhodium anti-tarnish plating and hand-beveled edges."
+      },
+
+      // HOME LIVING & DECOR (6 Items)
+      {
+        id: 4,
+        title: "Nordic Ultrasonic Ceramic Aroma Diffuser",
+        category: "Home",
+        basePriceUSD: 68.00,
+        originalPriceUSD: 95.00,
+        rating: 4.82,
+        reviewsCount: 228,
+        stockCount: 15,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&q=80"],
+        colors: ["#f8fafc", "#475569"],
+        sizes: ["300ml", "500ml"],
+        desc: "Hand-thrown porous matte ceramic shell with ultrasonic cold vaporization, 2700K warm circadian LED."
+      },
+      {
+        id: 8,
+        title: "Artisanal Matte Stoneware Pour-Over Carafe",
+        category: "Home",
+        basePriceUSD: 54.00,
+        originalPriceUSD: 75.00,
+        rating: 4.93,
+        reviewsCount: 310,
+        stockCount: 20,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80"],
+        colors: ["#475569", "#f1f5f9"],
+        sizes: ["600ml Server"],
+        desc: "Wheel-thrown ceramic cone with spiral vortex ridges, borosilicate decanter with walnut collar."
+      },
+      {
+        id: 11,
+        title: "Sculptural Brass Ambient Table Lamp & Qi Charger",
+        category: "Home",
+        basePriceUSD: 99.00,
+        originalPriceUSD: 140.00,
+        rating: 4.75,
+        reviewsCount: 76,
+        stockCount: 9,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&q=80"],
+        colors: ["#0f172a", "#f59e0b"],
+        sizes: ["Standard Desk"],
+        desc: "Spun brass body, touch-capacitive dimming, 2700K circadian LED, and integrated 15W Qi pad."
+      },
+      {
+        id: 28,
+        title: "Hand-Poured Amber & Sandalwood Soy Candle",
+        category: "Home",
+        basePriceUSD: 36.00,
+        originalPriceUSD: 48.00,
+        rating: 4.90,
+        reviewsCount: 140,
+        stockCount: 30,
+        inStock: true,
+        tag: "HOT",
+        image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1603006905003-be475563bc59?w=800&q=80"],
+        colors: ["#78350f"],
+        sizes: ["12oz 60-Hour"],
+        desc: "100% natural American soy wax with organic crackling wooden wick and pure botanical essential oils."
+      },
+      {
+        id: 29,
+        title: "Architectural Ceramic Minimalist Wabi-Sabi Vase",
+        category: "Home",
+        basePriceUSD: 62.00,
+        originalPriceUSD: 85.00,
+        rating: 4.81,
+        reviewsCount: 58,
+        stockCount: 12,
+        inStock: true,
+        tag: "NEW",
+        image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=80"],
+        colors: ["#e2e8f0"],
+        sizes: ["Medium Flute"],
+        desc: "Rough-textured stoneware fired at 1280°C with organic asymmetric silhouette and watertight glaze."
+      },
+      {
+        id: 30,
+        title: "Nero Marquina Solid Marble Coaster Set of 4",
+        category: "Home",
+        basePriceUSD: 48.00,
+        originalPriceUSD: 68.00,
+        rating: 4.88,
+        reviewsCount: 92,
+        stockCount: 18,
+        inStock: true,
+        tag: "SALE",
+        image: "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?w=800&q=80",
+        thumbnails: ["https://images.unsplash.com/photo-1584589167171-541ce45f1eea?w=800&q=80"],
+        colors: ["#090d16"],
+        sizes: ["Set of 4"],
+        desc: "Cut from Basque Country black marble with distinct natural white calcitic veining and velvet backing."
+      }
+    ];
+
+    // 2. Initial Verified Client Reviews Data
+    const INITIAL_REVIEWS = [
+      {
+        id: 101,
+        author: "Julian Thorne",
+        city: "Zurich, Switzerland",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80",
+        rating: 5,
+        productName: "Chronos Sapphire Chronograph",
+        comment: "The finishing on the bezel and the smooth sweep of the 28,800 vph movement is astonishing. It sits beside my Patek and holds its own in terms of tactile presence.",
+        date: "Oct 28, 2026"
+      },
+      {
+        id: 102,
+        author: "Camille Laurent",
+        city: "Paris, France",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80",
+        rating: 5,
+        productName: "Grade-A Mongolian Cashmere Knit",
+        comment: "Unbelievable drape and feather-light softness. Wore it throughout Milan Fashion Week and received countless compliments. LuxeMart's packaging is sheer art.",
+        date: "Nov 01, 2026"
+      },
+      {
+        id: 103,
+        author: "Marcus Sterling",
+        city: "London, UK",
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80",
+        rating: 5,
+        productName: "Aura Pro Wireless ANC Headphones",
+        comment: "The soundstage is wide, transparent, and effortlessly deep without unnatural digital bass boost. The ANC silenced my transatlantic flight completely.",
+        date: "Nov 03, 2026"
+      }
+    ];
+
+    // 3. Multi-Currency Configurations
+    const CURRENCIES = {
+      USD: { symbol: '$', rate: 1.00, threshold: 50 },
+      EUR: { symbol: '€', rate: 0.92, threshold: 45 },
+      GBP: { symbol: '£', rate: 0.79, threshold: 40 },
+      PKR: { symbol: 'Rs ', rate: 280.00, threshold: 14000 },
+      AED: { symbol: 'AED ', rate: 3.67, threshold: 180 }
+    };
+
+    // 4. Reactive State Store
+    const App = {
+      currency: localStorage.getItem('luxemart_curr') || 'USD',
+      theme: localStorage.getItem('luxemart_theme') || 'dark',
+      audioActive: localStorage.getItem('luxemart_audio') !== 'false',
+      cart: JSON.parse(localStorage.getItem('luxemart_cart') || '[]'),
+      wishlist: JSON.parse(localStorage.getItem('luxemart_wishlist') || '[]'),
+      orders: JSON.parse(localStorage.getItem('luxemart_orders') || '[]'),
+      reviews: JSON.parse(localStorage.getItem('luxemart_reviews') || JSON.stringify(INITIAL_REVIEWS)),
+      coupon: JSON.parse(localStorage.getItem('luxemart_coupon') || 'null'),
+      activeHeroSlide: 0,
+      heroTimer: null,
+      selectedReviewStars: 5,
+      checkoutStep: 1,
+      selectedPaymentType: 'card',
+      currentQVProduct: null
+    };
+
+    // 5. Sound Synthetics
+    const AudioEngine = {
+      play(type) {
+        if (!App.audioActive) return;
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          if (type === 'click') {
+            osc.frequency.setValueAtTime(440, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.11);
+          } else if (type === 'success') {
+            osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+            osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08);
+            osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.36);
+          }
+        } catch(e) {}
+      }
+    };
+
+    function formatMoney(amountUSD) {
+      const cur = CURRENCIES[App.currency] || CURRENCIES.USD;
+      const converted = amountUSD * cur.rate;
+      if (App.currency === 'PKR') {
+        return `${cur.symbol}${Math.round(converted).toLocaleString()}`;
+      }
+      return `${cur.symbol}${converted.toFixed(2)}`;
+    }
+
+    // 6. Application Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initAudio();
+      initHeroCarousel();
+      renderAllDepartmentSections();
+      renderReviewsSection();
+      renderCartDrawer();
+      renderWishlistDrawer();
+      populateReviewProductOptions();
+      setupSearchHandler();
+      initSaleClock();
+      startSocialProofTicker();
+
+      if (App.orders.length === 0) {
+        generateSampleOrderRecord(false);
+      }
+      renderOrdersHistory();
+      updateHeaderBadges();
+      updateHeroPrices();
+    });
+
+    // Theme Switcher
+    function initTheme() {
+      document.documentElement.setAttribute('data-theme', App.theme);
+      updateThemeIcon();
+    }
+
+    function toggleColorTheme() {
+      App.theme = App.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('luxemart_theme', App.theme);
+      document.documentElement.setAttribute('data-theme', App.theme);
+      updateThemeIcon();
+      showToastNotification(`Switched to ${App.theme} theme`, 'info');
+      AudioEngine.play('click');
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('themeIcon');
+      if (App.theme === 'dark') {
+        icon.className = 'fa-solid fa-sun';
+        icon.style.color = 'var(--brand-amber)';
+      } else {
+        icon.className = 'fa-solid fa-moon';
+        icon.style.color = 'var(--text-primary)';
+      }
+    }
+
+    // Audio Engine
+    function initAudio() {
+      const icon = document.getElementById('soundIcon');
+      icon.className = App.audioActive ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+    }
+
+    function toggleAudio() {
+      App.audioActive = !App.audioActive;
+      localStorage.setItem('luxemart_audio', App.audioActive);
+      initAudio();
+      showToastNotification(`Sound effects ${App.audioActive ? 'enabled' : 'muted'}`, 'info');
+      if (App.audioActive) AudioEngine.play('click');
+    }
+
+    // Currency Conversion
+    function changeCurrency(curr) {
+      App.currency = curr;
+      localStorage.setItem('luxemart_curr', curr);
+      const conf = CURRENCIES[curr];
+      document.getElementById('freeShipThreshold').textContent = `${conf.symbol}${conf.threshold}`;
+      renderAllDepartmentSections();
+      renderCartDrawer();
+      renderWishlistDrawer();
+      renderOrdersHistory();
+      updateHeroPrices();
+      showToastNotification(`Currency converted to ${curr}`, 'info');
+      AudioEngine.play('click');
+    }
+
+    function updateHeroPrices() {
+      document.querySelector('.hero-price-tag-1').textContent = formatMoney(249.99);
+      document.querySelector('.hero-price-tag-2').textContent = formatMoney(399.00);
+      document.querySelector('.hero-price-tag-3').textContent = formatMoney(145.00);
+      document.querySelector('.hero-price-tag-4').textContent = formatMoney(99.00);
+    }
+
+    // 7. Dynamic Running Hero Carousel Engine
+    function initHeroCarousel() {
+      startHeroAutoPlay();
+      const viewport = document.getElementById('heroCarouselViewport');
+      viewport.addEventListener('mouseenter', () => clearInterval(App.heroTimer));
+      viewport.addEventListener('mouseleave', () => startHeroAutoPlay());
+    }
+
+    function startHeroAutoPlay() {
+      clearInterval(App.heroTimer);
+      App.heroTimer = setInterval(() => {
+        nextHeroSlide();
+      }, 5500);
+    }
+
+    function showHeroSlide(index) {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      if (index >= slides.length) index = 0;
+      if (index < 0) index = slides.length - 1;
+      App.activeHeroSlide = index;
+
+      slides.forEach((s, idx) => s.classList.toggle('active-slide', idx === index));
+      dots.forEach((d, idx) => d.classList.toggle('active-dot', idx === index));
+    }
+
+    function nextHeroSlide() {
+      showHeroSlide(App.activeHeroSlide + 1);
+    }
+
+    function prevHeroSlide() {
+      showHeroSlide(App.activeHeroSlide - 1);
+    }
+
+    function goToHeroSlide(index) {
+      showHeroSlide(index);
+      AudioEngine.play('click');
+    }
+
+    // 8. Render All 4 Department Sections (Each with 6-8+ distinct items)
+    function renderAllDepartmentSections() {
+      renderSingleDepartment('Electronics', 'gridElectronics');
+      renderSingleDepartment('Fashion', 'gridFashion');
+      renderSingleDepartment('Accessories', 'gridWatches');
+      renderSingleDepartment('Home', 'gridHome');
+    }
+
+    function renderSingleDepartment(category, containerId) {
+      const container = document.getElementById(containerId);
+      const items = ALL_PRODUCTS.filter(p => p.category === category);
+
+      container.innerHTML = items.map(p => {
+        const isWish = App.wishlist.includes(p.id);
+        const discountPct = Math.round(((p.originalPriceUSD - p.basePriceUSD) / p.originalPriceUSD) * 100);
+
+        return `
+          <div class="luxe-product-card">
+            <div class="product-stage">
+              <span class="tag-badge tag-${p.tag.toLowerCase()}">${p.tag}</span>
+              <img src="${p.image}" alt="${p.title}" class="product-primary-img" loading="lazy">
+              
+              <div class="card-actions-float">
+                <button class="btn-circle-action ${isWish ? 'wishlist-active' : ''}" 
+                        onclick="toggleWishlist(${p.id})" 
+                        title="${isWish ? 'Remove from Saved' : 'Save to Wishlist'}">
+                  <i class="${isWish ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                </button>
+                <button class="btn-circle-action" onclick="openQuickViewModal(${p.id})" title="Inspect Details">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="product-body-content">
+              <div class="card-meta-row">
+                <span class="card-category-label">${p.category}</span>
+                <div class="card-rating-star">
+                  <i class="fa-solid fa-star"></i>
+                  <span>${p.rating}</span>
+                </div>
+              </div>
+
+              <h3 class="product-title-text" onclick="openQuickViewModal(${p.id})">${p.title}</h3>
+
+              <div class="scarcity-meter">
+                <div class="scarcity-label-row">
+                  <span><i class="fa-solid fa-fire" style="font-size:0.72rem;"></i> High Demand</span>
+                  <span>Only ${p.stockCount} left</span>
+                </div>
+                <div class="scarcity-track">
+                  <div class="scarcity-fill" style="width: ${Math.min(100, p.stockCount * 12)}%;"></div>
+                </div>
+              </div>
+
+              <div class="product-price-row">
+                <span class="product-current-price">${formatMoney(p.basePriceUSD)}</span>
+                <span class="product-original-price">${formatMoney(p.originalPriceUSD)}</span>
+                <span class="product-discount-pill">-${discountPct}%</span>
+              </div>
+
+              <button class="btn-quick-add" onclick="quickAddToBag(${p.id})">
+                <i class="fa-solid fa-cart-plus"></i> Add to Bag
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 9. Verified Client Reviews & Submission System
+    function renderReviewsSection() {
+      const container = document.getElementById('reviewsContainer');
+      const totalCountEl = document.getElementById('totalReviewsCount');
+      totalCountEl.textContent = (3480 + App.reviews.length - INITIAL_REVIEWS.length).toLocaleString();
+
+      container.innerHTML = App.reviews.map(r => `
+        <div class="review-card">
+          <div class="review-card-head">
+            <img src="${r.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80'}" alt="${r.author}" class="reviewer-avatar">
+            <div>
+              <div class="reviewer-name">${r.author}</div>
+              <div class="reviewer-badge"><i class="fa-solid fa-shield-halved"></i> Verified Collector • ${r.city}</div>
+            </div>
+          </div>
+
+          <div class="review-stars-row">
+            ${Array(r.rating).fill('<i class="fa-solid fa-star"></i>').join('')}
+            ${Array(5 - r.rating).fill('<i class="fa-regular fa-star"></i>').join('')}
+            <span style="color:var(--text-muted); font-size:0.75rem; margin-left:6px;">${r.date}</span>
+          </div>
+
+          <p class="review-text-quote">"${r.comment}"</p>
+          <div class="review-product-tag"><i class="fa-solid fa-tag" style="margin-right:4px;"></i> Purchased: ${r.productName}</div>
+        </div>
+      `).join('');
+    }
+
+    function populateReviewProductOptions() {
+      const select = document.getElementById('reviewProductSelect');
+      select.innerHTML = ALL_PRODUCTS.map(p => `
+        <option value="${p.title}">${p.title} (${p.category})</option>
+      `).join('');
+    }
+
+    function openReviewModal(productName = '') {
+      if (productName) {
+        document.getElementById('reviewProductSelect').value = productName;
+      }
+      setStarRating(5);
+      document.getElementById('writeReviewOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      AudioEngine.play('click');
+    }
+
+    function closeReviewModal() {
+      document.getElementById('writeReviewOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function setStarRating(num) {
+      App.selectedReviewStars = num;
+      const stars = document.querySelectorAll('#starPicker i');
+      stars.forEach(s => {
+        const val = parseInt(s.getAttribute('data-rating'));
+        s.classList.toggle('active-star', val <= num);
+      });
+    }
+
+    function submitClientReview(e) {
+      e.preventDefault();
+      const product = document.getElementById('reviewProductSelect').value;
+      const author = document.getElementById('reviewAuthorName').value.trim();
+      const city = document.getElementById('reviewAuthorCity').value.trim();
+      const comment = document.getElementById('reviewCommentText').value.trim();
+
+      const newReview = {
+        id: Date.now(),
+        author,
+        city,
+        avatar: `https://images.unsplash.com/photo-${1500000000000 + Math.floor(Math.random() * 50000000)}?w=150&q=80`,
+        rating: App.selectedReviewStars,
+        productName: product,
+        comment,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      };
+
+      App.reviews.unshift(newReview);
+      localStorage.setItem('luxemart_reviews', JSON.stringify(App.reviews));
+
+      renderReviewsSection();
+      closeReviewModal();
+      document.getElementById('clientReviewForm').reset();
+
+      showToastNotification(`Review published! Thank you, ${author}.`, 'success');
+      AudioEngine.play('success');
+
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+      }
+
+      document.getElementById('reviewsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 10. Quick View Modal
+    function openQuickViewModal(productId) {
+      const p = ALL_PRODUCTS.find(i => i.id === productId);
+      if (!p) return;
+
+      App.currentQVProduct = p;
+      const discountPct = Math.round(((p.originalPriceUSD - p.basePriceUSD) / p.originalPriceUSD) * 100);
+      const isWish = App.wishlist.includes(p.id);
+
+      const content = document.getElementById('quickViewModalContent');
+      content.innerHTML = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.25rem;">
+          <div>
+            <div style="height:350px; border-radius:var(--radius-lg); overflow:hidden; background:var(--bg-surface-elevated); margin-bottom:1rem;">
+              <img src="${p.image}" alt="${p.title}" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column;">
+            <div style="font-size:0.78rem; font-weight:800; color:var(--text-accent); text-transform:uppercase; margin-bottom:0.5rem;">${p.category}</div>
+            <h2 style="font-family:var(--font-display); font-size:1.6rem; font-weight:800; line-height:1.25; margin-bottom:0.75rem;">${p.title}</h2>
+            <div style="display:flex; align-items:baseline; gap:0.85rem; margin-bottom:1rem;">
+              <span style="font-family:var(--font-display); font-size:1.8rem; font-weight:800;">${formatMoney(p.basePriceUSD)}</span>
+              <span style="font-size:1.05rem; color:var(--text-muted); text-decoration:line-through;">${formatMoney(p.originalPriceUSD)}</span>
+              <span class="product-discount-pill">-${discountPct}%</span>
+            </div>
+            <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.65; margin-bottom:1.5rem;">${p.desc}</p>
+            <div style="display:flex; gap:0.75rem; margin-top:auto;">
+              <button class="btn-luxe btn-luxe-primary" style="flex:1;" onclick="quickAddToBag(${p.id}); closeQuickViewModal(); openCartDrawer();">
+                <i class="fa-solid fa-cart-plus"></i> Add To Bag
+              </button>
+              <button class="btn-circle-action ${isWish ? 'wishlist-active' : ''}" onclick="toggleWishlist(${p.id})">
+                <i class="${isWish ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('quickViewOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      AudioEngine.play('click');
+    }
+
+    function closeQuickViewModal() {
+      document.getElementById('quickViewOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // 11. Shopping Bag Management
+    function quickAddToBag(productId) {
+      const p = ALL_PRODUCTS.find(i => i.id === productId);
+      if (!p) return;
+
+      const line = App.cart.find(it => it.id === productId);
+      if (line) {
+        line.quantity++;
+      } else {
+        App.cart.push({
+          id: p.id,
+          title: p.title,
+          basePriceUSD: p.basePriceUSD,
+          image: p.image,
+          color: p.colors[0],
+          size: p.sizes[0],
+          quantity: 1
+        });
+      }
+
+      saveCart();
+      renderCartDrawer();
+      updateHeaderBadges();
+      AudioEngine.play('click');
+      showToastNotification(`Added "${p.title}" to bag`, 'success');
+
+      const badge = document.getElementById('cartCountBadge');
+      badge.classList.add('bump');
+      setTimeout(() => badge.classList.remove('bump'), 300);
+    }
+
+    function stepCartQty(index, delta) {
+      if (!App.cart[index]) return;
+      App.cart[index].quantity += delta;
+      if (App.cart[index].quantity <= 0) {
+        App.cart.splice(index, 1);
+        showToastNotification('Item removed', 'info');
+      }
+      saveCart();
+      renderCartDrawer();
+      updateHeaderBadges();
+    }
+
+    function removeCartItem(index) {
+      App.cart.splice(index, 1);
+      saveCart();
+      renderCartDrawer();
+      updateHeaderBadges();
+    }
+
+    function saveCart() {
+      localStorage.setItem('luxemart_cart', JSON.stringify(App.cart));
+    }
+
+    function openCartDrawer() {
+      renderCartDrawer();
+      document.getElementById('cartDrawerOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      AudioEngine.play('click');
+    }
+
+    function closeCartDrawer() {
+      document.getElementById('cartDrawerOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function renderCartDrawer() {
+      const container = document.getElementById('cartDrawerItems');
+      const footer = document.getElementById('cartDrawerFooter');
+      const countEl = document.getElementById('cartDrawerCountText');
+
+      const totalItems = App.cart.reduce((sum, it) => sum + it.quantity, 0);
+      countEl.textContent = totalItems;
+
+      if (App.cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:4rem 1rem;">
+            <i class="fa-solid fa-bag-shopping" style="font-size:3.5rem; color:var(--text-muted); margin-bottom:1rem;"></i>
+            <h4 style="font-family:var(--font-display); font-size:1.35rem; font-weight:700;">Your Bag is Empty</h4>
+            <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.35rem;">Discover mastercrafted pieces across our departments.</p>
+          </div>
+        `;
+        footer.style.display = 'none';
+        updateFreeShippingBar(0);
+        return;
+      }
+
+      footer.style.display = 'block';
+
+      container.innerHTML = App.cart.map((it, idx) => `
+        <div class="cart-row-card">
+          <img src="${it.image}" alt="${it.title}" class="cart-thumb-img">
+          <div class="cart-row-info">
+            <h4 class="cart-row-title">${it.title}</h4>
+            <div class="cart-row-variant">${it.size}</div>
+            <div class="cart-row-bottom">
+              <span class="cart-row-price">${formatMoney(it.basePriceUSD * it.quantity)}</span>
+              <div class="qty-counter">
+                <button class="qty-step-btn" onclick="stepCartQty(${idx}, -1)">-</button>
+                <span class="qty-number">${it.quantity}</span>
+                <button class="qty-step-btn" onclick="stepCartQty(${idx}, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="cart-item-del-btn" onclick="removeCartItem(${idx})"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      `).join('');
+
+      calculateCartBreakdown();
+    }
+
+    function calculateCartBreakdown() {
+      const subtotalUSD = App.cart.reduce((sum, it) => sum + (it.basePriceUSD * it.quantity), 0);
+      let discountUSD = 0;
+
+      if (App.coupon) {
+        discountUSD = subtotalUSD * App.coupon.rate;
+        document.getElementById('voucherRow').style.display = 'flex';
+        document.getElementById('billDiscountVal').textContent = `-${formatMoney(discountUSD)}`;
+      } else {
+        document.getElementById('voucherRow').style.display = 'none';
+      }
+
+      const taxableUSD = Math.max(0, subtotalUSD - discountUSD);
+      const isFreeShip = taxableUSD >= 50 || taxableUSD === 0;
+      const shippingUSD = isFreeShip ? 0 : 9.99;
+      const taxUSD = taxableUSD * 0.05;
+      const grandTotalUSD = taxableUSD + shippingUSD + taxUSD;
+
+      document.getElementById('billSubtotalVal').textContent = formatMoney(subtotalUSD);
+      document.getElementById('billShippingVal').textContent = shippingUSD === 0 ? 'FREE' : formatMoney(shippingUSD);
+      document.getElementById('billTaxVal').textContent = formatMoney(taxUSD);
+      document.getElementById('billGrandTotalVal').textContent = formatMoney(grandTotalUSD);
+
+      updateFreeShippingBar(taxableUSD);
+      return { grandTotalUSD };
+    }
+
+    function updateFreeShippingBar(taxableUSD) {
+      const threshold = 50;
+      const fill = document.getElementById('fsBarFill');
+      const text = document.getElementById('fsStatusText');
+      const pct = document.getElementById('fsPercentText');
+
+      if (taxableUSD >= threshold) {
+        fill.style.width = '100%';
+        fill.style.background = 'var(--brand-emerald)';
+        text.innerHTML = '<i class="fa-solid fa-circle-check" style="color:var(--brand-emerald);"></i> <strong>FREE Express Shipping Unlocked!</strong>';
+        pct.textContent = '100%';
+      } else {
+        const remaining = threshold - taxableUSD;
+        const p = Math.round((taxableUSD / threshold) * 100);
+        fill.style.width = `${p}%`;
+        fill.style.background = 'var(--gradient-primary)';
+        text.textContent = `Add ${formatMoney(remaining)} more for FREE Shipping!`;
+        pct.textContent = `${p}%`;
+      }
+    }
+
+    function copyPromoCode(code) {
+      navigator.clipboard.writeText(code);
+      document.getElementById('promoVoucherInput').value = code;
+      showToastNotification(`Voucher "${code}" copied to clipboard!`, 'info');
+      AudioEngine.play('click');
+    }
+
+    function applyPromoVoucher() {
+      const input = document.getElementById('promoVoucherInput');
+      const code = input.value.trim().toUpperCase();
+      if (code === 'FLASH20') {
+        App.coupon = { code: 'FLASH20', rate: 0.20 };
+        localStorage.setItem('luxemart_coupon', JSON.stringify(App.coupon));
+        calculateCartBreakdown();
+        showToastNotification('Applied 20% Discount!', 'success');
+        AudioEngine.play('success');
+      } else {
+        showToastNotification('Invalid voucher code. Try "FLASH20"', 'error');
+      }
+    }
+
+    // 12. Wishlist Management
+    function toggleWishlist(productId) {
+      const idx = App.wishlist.indexOf(productId);
+      const p = ALL_PRODUCTS.find(i => i.id === productId);
+
+      if (idx === -1) {
+        App.wishlist.push(productId);
+        showToastNotification(`Saved "${p.title}" to Archive`, 'success');
+      } else {
+        App.wishlist.splice(idx, 1);
+        showToastNotification('Removed from Archive', 'info');
+      }
+
+      localStorage.setItem('luxemart_wishlist', JSON.stringify(App.wishlist));
+      updateHeaderBadges();
+      renderAllDepartmentSections();
+      renderWishlistDrawer();
+      AudioEngine.play('click');
+    }
+
+    function openWishlistDrawer() {
+      renderWishlistDrawer();
+      document.getElementById('wishlistDrawerOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      AudioEngine.play('click');
+    }
+
+    function closeWishlistDrawer() {
+      document.getElementById('wishlistDrawerOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function renderWishlistDrawer() {
+      const container = document.getElementById('wishlistDrawerItems');
+      const countText = document.getElementById('wishlistCountText');
+      countText.textContent = App.wishlist.length;
+
+      const items = ALL_PRODUCTS.filter(p => App.wishlist.includes(p.id));
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:4rem 1rem;">
+            <i class="fa-regular fa-heart" style="font-size:3.5rem; color:var(--text-muted); margin-bottom:1rem;"></i>
+            <h4 style="font-family:var(--font-display); font-size:1.35rem; font-weight:700;">Archive is Empty</h4>
+            <p style="color:var(--text-secondary); font-size:0.9rem;">Click the heart icon on any product to save it.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(p => `
+        <div class="cart-row-card">
+          <img src="${p.image}" alt="${p.title}" class="cart-thumb-img">
+          <div class="cart-row-info">
+            <h4 class="cart-row-title">${p.title}</h4>
+            <div class="cart-row-price" style="margin-bottom:0.75rem;">${formatMoney(p.basePriceUSD)}</div>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn-luxe btn-luxe-primary" style="padding:0.4rem 0.85rem; font-size:0.78rem;" onclick="quickAddToBag(${p.id}); toggleWishlist(${p.id});">Move to Bag</button>
+              <button class="btn-luxe btn-luxe-secondary" style="padding:0.4rem 0.85rem; font-size:0.78rem;" onclick="toggleWishlist(${p.id})">Remove</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateHeaderBadges() {
+      const count = App.cart.reduce((sum, it) => sum + it.quantity, 0);
+      document.getElementById('cartCountBadge').textContent = count;
+      document.getElementById('wishlistCountBadge').textContent = App.wishlist.length;
+      document.getElementById('ordersCountBadge').textContent = App.orders.length;
+    }
+
+    // 13. Multi-Step Checkout Flow
+    function launchCheckoutFlow() {
+      if (App.cart.length === 0) return;
+      closeCartDrawer();
+      App.checkoutStep = 1;
+      refreshCheckoutStepUI();
+      document.getElementById('checkoutModalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      AudioEngine.play('click');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function goNextCheckoutStep() {
+      if (App.checkoutStep < 4) {
+        App.checkoutStep++;
+        refreshCheckoutStepUI();
+        AudioEngine.play('click');
+      }
+    }
+
+    function goPreviousCheckoutStep() {
+      if (App.checkoutStep > 1) {
+        App.checkoutStep--;
+        refreshCheckoutStepUI();
+        AudioEngine.play('click');
+      }
+    }
+
+    function refreshCheckoutStepUI() {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`chkPage${i}`).classList.remove('active-page');
+        const node = document.getElementById(`chkStepNode${i}`);
+        node.classList.remove('active', 'completed');
+        if (i < App.checkoutStep) node.classList.add('completed');
+        if (i === App.checkoutStep) node.classList.add('active');
+      }
+
+      document.getElementById(`chkPage${App.checkoutStep}`).classList.add('active-page');
+      document.getElementById('chkPrevBtn').style.display = App.checkoutStep > 1 ? 'inline-flex' : 'none';
+      document.getElementById('chkNextBtn').style.display = App.checkoutStep < 4 ? 'inline-flex' : 'none';
+      document.getElementById('chkSubmitBtn').style.display = App.checkoutStep === 4 ? 'inline-flex' : 'none';
+
+      if (App.checkoutStep === 4) {
+        const fn = document.getElementById('chkFirstName').value;
+        const ln = document.getElementById('chkLastName').value;
+        const addr = document.getElementById('chkAddress').value;
+        const city = document.getElementById('chkCity').value;
+
+        document.getElementById('chkSummaryName').textContent = `${fn} ${ln}`;
+        document.getElementById('chkSummaryAddress').textContent = `${addr}, ${city}`;
+        const breakdown = calculateCartBreakdown();
+        document.getElementById('chkSummaryTotal').textContent = formatMoney(breakdown.grandTotalUSD);
+      }
+    }
+
+    function choosePaymentType(type, el) {
+      App.selectedPaymentType = type;
+      document.querySelectorAll('.pay-card-option').forEach(c => c.classList.remove('active-method'));
+      el.classList.add('active-method');
+      AudioEngine.play('click');
+    }
+
+    function formatCardNumber(input) {
+      let v = input.value.replace(/\D/g, '').substring(0, 16);
+      let f = v.match(/.{1,4}/g)?.join(' ') || v;
+      input.value = f;
+      document.getElementById('previewCardNumber').textContent = f || '4242 •••• •••• 4242';
+    }
+
+    function executeOrderPlacement() {
+      const submitBtn = document.getElementById('chkSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authorizing Vault...';
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Authorize & Place Order';
+
+        const breakdown = calculateCartBreakdown();
+        const orderId = `ORD-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+        const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+        const record = {
+          id: orderId,
+          date: dateStr,
+          status: 'Processing',
+          customerName: `${document.getElementById('chkFirstName').value} ${document.getElementById('chkLastName').value}`,
+          address: `${document.getElementById('chkAddress').value}, ${document.getElementById('chkCity').value}`,
+          items: [...App.cart],
+          grandTotalUSD: breakdown.grandTotalUSD
+        };
+
+        App.orders.unshift(record);
+        localStorage.setItem('luxemart_orders', JSON.stringify(App.orders));
+
+        App.cart = [];
+        App.coupon = null;
+        localStorage.removeItem('luxemart_coupon');
+        saveCart();
+        renderCartDrawer();
+        updateHeaderBadges();
+
+        closeCheckoutModal();
+        document.getElementById('receiptTrackingId').textContent = `#${orderId}`;
+        document.getElementById('orderSuccessOverlay').classList.add('open');
+        renderOrdersHistory();
+        AudioEngine.play('success');
+
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+        }
+      }, 1200);
+    }
+
+    function closeSuccessAndOpenTracker() {
+      document.getElementById('orderSuccessOverlay').classList.remove('open');
+      openOrdersModal();
+    }
+
+    // 14. Orders Management & Reviews on Delivered Orders
+    function openOrdersModal() {
+      renderOrdersHistory();
+      document.getElementById('ordersTrackerOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      AudioEngine.play('click');
+    }
+
+    function closeOrdersModal() {
+      document.getElementById('ordersTrackerOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function renderOrdersHistory() {
+      const container = document.getElementById('ordersRecordList');
+      document.getElementById('ordersCountBadge').textContent = App.orders.length;
+
+      if (App.orders.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:3rem;"><p>No orders on record.</p></div>`;
+        return;
+      }
+
+      container.innerHTML = App.orders.map((ord, idx) => {
+        let step1 = 'done', step2 = '', step3 = '';
+        if (ord.status === 'Processing') { step2 = 'current'; }
+        else if (ord.status === 'Shipped') { step2 = 'done'; step3 = 'current'; }
+        else if (ord.status === 'Delivered') { step2 = 'done'; step3 = 'done'; }
+
+        return `
+          <div style="background:var(--bg-surface-elevated); border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:1.5rem; margin-bottom:1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem; margin-bottom:1rem;">
+              <div>
+                <strong style="font-family:monospace; color:var(--text-accent); font-size:1.1rem;">#${ord.id}</strong>
+                <span style="font-size:0.8rem; color:var(--text-muted); margin-left:8px;">${ord.date}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <span style="background:rgba(99,102,241,0.15); color:var(--text-accent); padding:0.25rem 0.75rem; border-radius:var(--radius-full); font-size:0.75rem; font-weight:800;">
+                  ${ord.status}
+                </span>
+                <button class="btn-luxe btn-luxe-secondary" style="padding:0.3rem 0.65rem; font-size:0.75rem;" onclick="cycleOrderStatus(${idx})">
+                  <i class="fa-solid fa-arrows-rotate"></i> Advance Status
+                </button>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-track-wrap">
+              <div class="timeline-node ${step1}"><div class="timeline-dot"><i class="fa-solid fa-check"></i></div><span>Ordered</span></div>
+              <div class="timeline-node ${step2}"><div class="timeline-dot"><i class="fa-solid fa-box"></i></div><span>Dispatched</span></div>
+              <div class="timeline-node ${step3}"><div class="timeline-dot"><i class="fa-solid fa-truck-ramp-box"></i></div><span>Delivered</span></div>
+            </div>
+
+            <!-- Products in Order with Direct Review Trigger -->
+            <div style="background:var(--bg-surface); border-radius:var(--radius-md); padding:0.85rem; display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem;">
+              ${ord.items.map(it => `
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.82rem;">
+                  <span><strong>${it.quantity}x</strong> ${it.title}</span>
+                  <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <span>${formatMoney(it.basePriceUSD * it.quantity)}</span>
+                    <button class="btn-luxe btn-luxe-secondary" style="padding:0.2rem 0.55rem; font-size:0.72rem; color:var(--brand-amber);" onclick="closeOrdersModal(); openReviewModal('${it.title}');">
+                      <i class="fa-solid fa-star"></i> Review
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function cycleOrderStatus(idx) {
+      const o = App.orders[idx];
+      if (!o) return;
+      if (o.status === 'Processing') o.status = 'Shipped';
+      else if (o.status === 'Shipped') o.status = 'Delivered';
+      else if (o.status === 'Delivered') o.status = 'Processing';
+
+      localStorage.setItem('luxemart_orders', JSON.stringify(App.orders));
+      renderOrdersHistory();
+      showToastNotification(`Order #${o.id} status updated to: ${o.status}`, 'info');
+      AudioEngine.play('click');
+    }
+
+    function generateSampleOrderRecord(notify = true) {
+      const demo = {
+        id: `ORD-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+        date: 'Nov 02, 2026',
+        status: 'Delivered',
+        customerName: 'Victoria Hastings',
+        address: '24 Berkeley Square, Mayfair, London',
+        items: [
+          { ...ALL_PRODUCTS[1], quantity: 1 },
+          { ...ALL_PRODUCTS[0], quantity: 1 }
+        ],
+        grandTotalUSD: 648.99
+      };
+      App.orders.unshift(demo);
+      localStorage.setItem('luxemart_orders', JSON.stringify(App.orders));
+      renderOrdersHistory();
+      if (notify) showToastNotification('Sample delivered order generated!', 'success');
+    }
+
+    // 15. Search & Filters
+    function setupSearchHandler() {
+      const input = document.getElementById('globalSearchInput');
+      const clearBtn = document.getElementById('searchClearBtn');
+
+      input.addEventListener('input', (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        clearBtn.style.display = q ? 'block' : 'none';
+
+        if (!q) {
+          renderAllDepartmentSections();
+          return;
+        }
+
+        // Filter and highlight cards
+        document.querySelectorAll('.luxe-product-card').forEach(card => {
+          const title = card.querySelector('.product-title-text').textContent.toLowerCase();
+          const match = title.includes(q);
+          card.style.display = match ? 'flex' : 'none';
+        });
+      });
+
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        clearBtn.style.display = 'none';
+        renderAllDepartmentSections();
+      });
+    }
+
+    // 16. FAQ & Smooth Scrolling
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      item.classList.toggle('open');
+      AudioEngine.play('click');
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function initSaleClock() {
+      let secs = 8 * 3600 + 42 * 60 + 19;
+      setInterval(() => {
+        secs--;
+        if (secs <= 0) secs = 12 * 3600;
+        const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+        const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+        const s = String(secs % 60).padStart(2, '0');
+        document.getElementById('countdownClock').textContent = `${h}h : ${m}m : ${s}s`;
+      }, 1000);
+    }
+
+    // 17. Live Social Proof Popups
+    function startSocialProofTicker() {
+      const popup = document.getElementById('socialProofPopup');
+      const img = document.getElementById('socialProofImg');
+      const text = document.getElementById('socialProofText');
+      const time = document.getElementById('socialProofTime');
+
+      const data = [
+        { city: 'Tokyo', p: ALL_PRODUCTS[0] },
+        { city: 'London', p: ALL_PRODUCTS[1] },
+        { city: 'Paris', p: ALL_PRODUCTS[2] },
+        { city: 'Geneva', p: ALL_PRODUCTS[6] }
+      ];
+
+      let idx = 0;
+      setInterval(() => {
+        const cur = data[idx];
+        idx = (idx + 1) % data.length;
+
+        img.src = cur.p.image;
+        text.textContent = `Someone in ${cur.city} purchased ${cur.p.title.substring(0, 30)}...`;
+        time.textContent = `${Math.floor(Math.random() * 5) + 1} minutes ago`;
+
+        popup.classList.add('show');
+        setTimeout(() => popup.classList.remove('show'), 4800);
+      }, 18000);
+    }
+
+    // 18. Toast Alert Notifications
+    function showToastNotification(msg, type = 'info') {
+      const container = document.getElementById('toastStackContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast-card toast-${type}`;
+
+      let icon = 'fa-solid fa-circle-info';
+      if (type === 'success') icon = 'fa-solid fa-circle-check';
+      if (type === 'error') icon = 'fa-solid fa-triangle-exclamation';
+
+      toast.innerHTML = `
+        <i class="${icon}" style="font-size:1.3rem; color:${type === 'success' ? 'var(--brand-emerald)' : type === 'error' ? 'var(--brand-rose)' : 'var(--brand-indigo)'};"></i>
+        <div>
+          <div style="font-weight:800; font-size:0.85rem;">${type === 'success' ? 'Verified' : type === 'error' ? 'Notice' : 'Information'}</div>
+          <div style="font-size:0.8rem; color:var(--text-secondary);">${msg}</div>
+        </div>
+      `;
+
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 15);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 3400);
+    }
+  </script>
+</body>
+</html>
